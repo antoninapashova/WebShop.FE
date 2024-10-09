@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth/auth.service';
-import { UserStorageService } from '../service/storage/user-storage.service';
+import { UserStorageService } from '../services/storage/user-storage.service';
 import { Router } from '@angular/router';
 
 @Component({
