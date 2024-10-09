@@ -7,35 +7,30 @@ const TOKEN = 'ecom-token';
   providedIn: 'root',
 })
 export class UserStorageService {
-  private static userPayload: any;
-
-  constructor() {
-    UserStorageService.userPayload = this.decodeToken();
-  }
-
   public saveToken(token: string): void {
     window.localStorage.removeItem(TOKEN);
     window.localStorage.setItem(TOKEN, token);
   }
 
-  getToken() {
+  static getToken(): any {
     return localStorage.getItem(TOKEN);
   }
 
-  decodeToken() {
+  static decodeToken(): any {
     const jwtHelper = new JwtHelperService();
     const token = this.getToken()!;
     return jwtHelper.decodeToken(token);
   }
 
   static getRoleFromToken() {
-    if (this.userPayload) {
-      return this.userPayload.role;
+    if (this.getToken()) {
+      let token = this.decodeToken();
+      return token.sub;
     }
   }
 
   static isAdminLoggedIn(): boolean {
-    if (this.userPayload) {
+    if (this.getToken() == null) {
       return false;
     }
 
@@ -44,7 +39,7 @@ export class UserStorageService {
   }
 
   static isCustomerLoggedIn(): boolean {
-    if (this.userPayload) {
+    if (this.getToken() == null) {
       return false;
     }
 
