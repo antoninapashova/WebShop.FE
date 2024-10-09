@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           let role: String;
           if (UserStorageService.isAdminLoggedIn()) {
             role = 'admin';
-          } else {
+          } else if (UserStorageService.isCustomerLoggedIn()) {
             role = 'customer';
           }
 
