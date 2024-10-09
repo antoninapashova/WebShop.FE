@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth/auth.service';
+import { UserStorageService } from '../service/storage/user-storage.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +39,14 @@ export class LoginComponent implements OnInit {
 
       this.authService.login({ username, password }).subscribe({
         next: () => {
-          this.snackBar.open('Login Success', 'OK', { duration: 50000 });
+          let role: String;
+          if (UserStorageService.isAdminLoggedIn()) {
+            role = 'admin';
+          } else {
+            role = 'customer';
+          }
+
+          this.router.navigateByUrl(`${role}/dashboard`);
         },
         error: () => {
           this.snackBar.open('Bad credentials', 'ERROR', { duration: 50000 });
