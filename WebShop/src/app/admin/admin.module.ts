@@ -7,9 +7,10 @@ import { PostCategoryComponent } from './components/post-category/post-category.
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WebShopMaterialModule } from '../WebShopMaterialModule';
 import { provideHttpClient } from '@angular/common/http';
+import { PostProductComponent } from './components/post-product/post-product.component';
 
 @NgModule({
-  declarations: [AdminComponent, DashboardComponent, PostCategoryComponent],
+  declarations: [AdminComponent, DashboardComponent, PostCategoryComponent, PostProductComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
