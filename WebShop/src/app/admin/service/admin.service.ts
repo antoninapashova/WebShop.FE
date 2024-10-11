@@ -19,6 +19,19 @@ export class AdminService {
     );
   }
 
+  getAllCategories(): Observable<any> {
+    return this.http.get(BASIC_URL + 'all-categories', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  addProduct(productDto: any): Observable<any> {
+    return this.http.post(BASIC_URL + 'add-product', productDto, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',
