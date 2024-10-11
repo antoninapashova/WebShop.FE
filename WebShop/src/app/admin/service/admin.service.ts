@@ -37,6 +37,19 @@ export class AdminService {
     });
   }
 
+  getAllProductsByName(name: any): Observable<any> {
+    return this.http.get(BASIC_URL + `search/${name}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  deleteProduct(id: any): Observable<any> {
+    return this.http.delete(BASIC_URL + `delete-product/${id}`, {
+      headers: this.createAuthorizationHeader(),
+      responseType: 'text',
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',
