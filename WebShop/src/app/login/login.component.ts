@@ -41,12 +41,12 @@ export class LoginComponent implements OnInit {
         next: () => {
           let role: String;
           if (UserStorageService.isAdminLoggedIn()) {
-            role = 'admin';
+            role = 'ADMIN';
           } else if (UserStorageService.isCustomerLoggedIn()) {
-            role = 'customer';
+            role = 'CUSTOMER';
           }
 
-          this.router.navigateByUrl(`${role}/dashboard`);
+          this.router.navigateByUrl(`${role.toLowerCase()}/dashboard`);
         },
         error: () => {
           this.snackBar.open('Bad credentials', 'ERROR', { duration: 50000 });
