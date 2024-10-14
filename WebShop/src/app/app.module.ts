@@ -11,7 +11,6 @@ import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, SignupComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     BrowserModule,
     AppRoutingModule,
