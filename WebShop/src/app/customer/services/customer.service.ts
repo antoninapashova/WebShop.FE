@@ -43,7 +43,7 @@ export class CustomerService {
     cartItemId: string,
     isIncreaseChange: boolean
   ): Observable<any> {
-    return this.http.post(
+    return this.http.put(
       BASIC_URL + 'cart/changeItemQuantity',
       { cartItemId, isIncreaseChange },
       {
