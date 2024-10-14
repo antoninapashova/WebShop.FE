@@ -51,6 +51,8 @@ export class CartComponent {
           this.snackBar.open(res.message, 'Close', {
             duration: 50000,
           });
+
+          this.optimisticUpdate(itemId, isIncreaseChange);
         },
         error: (err) => {
           this.snackBar.open(err.message, 'ERROR', {
@@ -59,5 +61,25 @@ export class CartComponent {
           });
         },
       });
+  }
+
+  optimisticUpdate(itemId: string, isIncreaseChange: boolean) {
+    let items = this.cart.cartItems.map((element) => {
+      if (isIncreaseChange) {
+        return element.id == itemId
+          ? { ...element, quantity: element.quantity + 1 }
+          : element;
+      } else {
+        return element.id == itemId
+          ? { ...element, quantity: element.quantity - 1 }
+          : element;
+      }
+    });
+
+    let totalPrice = items.reduce(
+      (accumulator, item) => (accumulator += item.price * item.quantity),
+      0
+    );
+    this.cart = { ...this.cart, cartItems: items, totalPrice };
   }
 }
