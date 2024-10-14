@@ -4,7 +4,7 @@
     <mat-card-content>
       <form [formGroup]="signinForm">
         <mat-form-field appearance="outline">
-          <mat-lable>Username</mat-lable>
+          <mat-label>Username</mat-label>
           <input matInput formControlName="username" required />
           <mat-error
             *ngIf="signinForm.controls['username'].errors?.['required']"
@@ -17,7 +17,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-lable>Password</mat-lable>
+          <mat-label>Password</mat-label>
           <input
             matInput
             type="{{ hidePassword ? 'password' : 'text' }}"
@@ -44,7 +44,7 @@
         </mat-form-field>
       </form>
     </mat-card-content>
-    <mat-card-action>
+    <mat-card-actions>
       <button
         mat-raised-button
         color="primary"
@@ -54,6 +54,6 @@
       >
         Sign In
       </button>
-    </mat-card-action>
+    </mat-card-actions>
   </mat-card>
 </div>

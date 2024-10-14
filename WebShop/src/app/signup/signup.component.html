@@ -5,7 +5,7 @@
     <mat-card-content>
       <form [formGroup]="signupForm">
         <mat-form-field appearance="outline">
-          <mat-lable>Username</mat-lable>
+          <mat-label>Username</mat-label>
           <input matInput formControlName="username" required />
           <mat-error
             *ngIf="signupForm.controls['username'].errors?.['required']"
@@ -18,7 +18,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-lable>First name</mat-lable>
+          <mat-label>First name</mat-label>
           <input matInput formControlName="firstName" required />
           <mat-error
             *ngIf="signupForm.controls['firstName'].errors?.['required']"
@@ -31,7 +31,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-lable>Last name</mat-lable>
+          <mat-label>Last name</mat-label>
           <input matInput formControlName="lastName" required />
           <mat-error
             *ngIf="signupForm.controls['lastName'].errors?.['required']"
@@ -44,7 +44,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-lable>Email</mat-lable>
+          <mat-label>Email</mat-label>
           <input matInput formControlName="email" required />
           <mat-error *ngIf="signupForm.controls['email'].errors?.['required']"
             >Email is required</mat-error
@@ -58,7 +58,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-lable>Password</mat-lable>
+          <mat-label>Password</mat-label>
           <input
             matInput
             type="{{ hidePassword ? 'password' : 'text' }}"
@@ -85,7 +85,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-lable>Confirm Password</mat-lable>
+          <mat-label>Confirm Password</mat-label>
           <input
             matInput
             type="{{ hidePassword ? 'password' : 'text' }}"
@@ -117,7 +117,7 @@
         </mat-form-field>
       </form>
     </mat-card-content>
-    <mat-card-action>
+    <mat-card-actions>
       <button
         mat-raised-button
         color="primary"
@@ -127,6 +127,6 @@
       >
         Sign Up
       </button>
-    </mat-card-action>
+    </mat-card-actions>
   </mat-card>
 </div>
