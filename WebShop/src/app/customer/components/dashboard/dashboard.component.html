@@ -1,1 +1,55 @@
-<p>dashboard works!</p>
+<form
+  [formGroup]="searchProductForm"
+  class="search-form"
+  (submit)="submitForm()"
+>
+  <mat-form-field appearance="outline" class="search-input">
+    <mat-label>Enter Keyword to search</mat-label>
+    <input matInput type="text" placeholder="Name" formControlName="title" />
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+    [disabled]="searchProductForm.invalid"
+  >
+    <mat-icon>search</mat-icon>
+  </button>
+</form>
+
+<div class="product-list">
+  <mat-card class="product-card" *ngFor="let product of products">
+    <div class="product-image">
+      <img [src]="product.processedImage" alt="product-image" />
+    </div>
+
+    <div class="product-details">
+      <h2 class="product-name">{{ product.name }}</h2>
+      <p class="product-description">{{ product.description }}</p>
+
+      <mat-divider></mat-divider>
+      <div class="product-info">
+        <div class="info-row">
+          <span class="info-lable">Price:</span>
+          <span class="info-value">${{ product.price }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-lable">Category:</span>
+          <span class="info-value">{{ product.categoryName }}</span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="actions">
+        <button
+          mat-raised-button
+          color="primary"
+          class="update-button"
+          (click)="addToCart(product.id)"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>

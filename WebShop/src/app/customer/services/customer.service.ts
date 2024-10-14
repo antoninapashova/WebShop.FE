@@ -1,0 +1,61 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { UserStorageService } from '../../services/storage/user-storage.service';
+
+const BASIC_URL = 'http://localhost:8080/';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CustomerService {
+  constructor(private http: HttpClient) {}
+
+  getAllProducts(): Observable<any> {
+    return this.http.get(BASIC_URL + 'all-products', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  getAllProductsByName(name: any): Observable<any> {
+    return this.http.get(BASIC_URL + `search/${name}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  addToCart(productId: any): Observable<any> {
+    return this.http.post(
+      BASIC_URL + `add-to-cart/${productId}`,
+      {},
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
+  }
+
+  getCart(): Observable<any> {
+    return this.http.get(BASIC_URL + 'get-cart', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  changeItemQuantity(
+    cartItemId: string,
+    isIncreaseChange: boolean
+  ): Observable<any> {
+    return this.http.post(
+      BASIC_URL + 'cart/changeItemQuantity',
+      { cartItemId, isIncreaseChange },
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
+  }
+
+  private createAuthorizationHeader(): HttpHeaders {
+    return new HttpHeaders().append(
+      'Authorization',
+      'Bearer ' + UserStorageService.getToken()
+    );
+  }
+}
