@@ -39,6 +39,7 @@ import { MatTableModule } from '@angular/material/table';
     MatNativeDateModule,
     MatDialogModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
   exports: [
     MatButtonModule,
@@ -59,6 +60,7 @@ import { MatTableModule } from '@angular/material/table';
     MatNativeDateModule,
     MatDialogModule,
     MatTableModule,
+    MatPaginatorModule,
   ],
 })
 export class WebShopMaterialModule {}
