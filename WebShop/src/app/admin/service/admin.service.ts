@@ -50,6 +50,12 @@ export class AdminService {
     });
   }
 
+  getPlacedOrders(): Observable<any> {
+    return this.http.get(BASIC_URL + 'all-orders', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',
