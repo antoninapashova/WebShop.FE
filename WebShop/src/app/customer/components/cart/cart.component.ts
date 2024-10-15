@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerService } from '../../services/customer.service';
 import { MatDialog } from '@angular/material/dialog';
 import Cart from '../../interfaces/Cart';
+import { PlaceOrderComponent } from '../place-order/place-order.component';
 
 @Component({
   selector: 'app-cart',
@@ -32,7 +33,7 @@ export class CartComponent {
         //     'data:image/jpeg;base64,' + element.returnedImg;
         //  });
 
-        this.cart = res;
+        this.cart = res.data;
       },
       error: (err) => {
         this.snackBar.open(err.message, 'ERROR', {
@@ -61,6 +62,10 @@ export class CartComponent {
           });
         },
       });
+  }
+
+  placeOrder() {
+    this.matDialog.open(PlaceOrderComponent);
   }
 
   optimisticUpdate(itemId: string, isIncreaseChange: boolean) {

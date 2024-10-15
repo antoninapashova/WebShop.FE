@@ -52,6 +52,12 @@ export class CustomerService {
     );
   }
 
+  placeOrder(orderDto: any): Observable<any> {
+    return this.http.post(BASIC_URL + 'create-order', orderDto, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',
