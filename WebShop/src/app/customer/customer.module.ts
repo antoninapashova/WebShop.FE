@@ -10,7 +10,12 @@ import { CartComponent } from './components/cart/cart.component';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
 
 @NgModule({
-  declarations: [CustomerComponent, DashboardComponent, CartComponent, PlaceOrderComponent],
+  declarations: [
+    CustomerComponent,
+    DashboardComponent,
+    CartComponent,
+    PlaceOrderComponent,
+  ],
   imports: [
     CommonModule,
     CustomerRoutingModule,

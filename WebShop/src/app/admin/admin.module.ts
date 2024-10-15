@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WebShopMaterialModule } from '../WebShopMaterialModule';
 import { provideHttpClient } from '@angular/common/http';
 import { PostProductComponent } from './components/post-product/post-product.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PostProductComponent } from './components/post-product/post-product.com
     DashboardComponent,
     PostCategoryComponent,
     PostProductComponent,
+    OrdersComponent,
   ],
   imports: [
     CommonModule,
