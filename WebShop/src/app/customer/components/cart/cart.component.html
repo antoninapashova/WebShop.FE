@@ -25,6 +25,9 @@
               <button (click)="changeItemQuantity(item?.id, true)">
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
+              <div class="total-price">
+                Amount: {{ item?.quantity * item.price | currency }}
+              </div>
             </div>
           </div>
         </div>
@@ -34,7 +37,7 @@
     <div class="total-price">
       Total Amount: {{ cart?.totalPrice | currency }}
     </div>
-    <div class="total-price">Amount: {{ cart?.totalPrice | currency }}</div>
+
     <div>
       <button mat-raised-button color="primary" (click)="placeOrder()">
         Place Order
