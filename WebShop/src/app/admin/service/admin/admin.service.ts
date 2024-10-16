@@ -66,6 +66,12 @@ export class AdminService {
     );
   }
 
+  getOrderItems(orderId: string): Observable<any> {
+    return this.http.get(BASIC_URL + `get-order-items/${orderId}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',

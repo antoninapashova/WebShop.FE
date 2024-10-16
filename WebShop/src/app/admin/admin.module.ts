@@ -9,6 +9,7 @@ import { WebShopMaterialModule } from '../WebShopMaterialModule';
 import { provideHttpClient } from '@angular/common/http';
 import { PostProductComponent } from './components/post-product/post-product.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { OrderItemsComponent } from './components/order-items/order-items.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { OrdersComponent } from './components/orders/orders.component';
     PostCategoryComponent,
     PostProductComponent,
     OrdersComponent,
+    OrderItemsComponent,
   ],
   imports: [
     CommonModule,
