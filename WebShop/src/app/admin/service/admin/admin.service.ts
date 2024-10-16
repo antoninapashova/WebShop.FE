@@ -50,6 +50,16 @@ export class AdminService {
     });
   }
 
+  updateProductById(productDto: any, productId: string): Observable<any> {
+    return this.http.put(
+      BASIC_URL + `update-product/${productId}`,
+      productDto,
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
+  }
+
   getPlacedOrders(): Observable<any> {
     return this.http.get(BASIC_URL + 'all-orders', {
       headers: this.createAuthorizationHeader(),
@@ -68,6 +78,12 @@ export class AdminService {
 
   getOrderItems(orderId: string): Observable<any> {
     return this.http.get(BASIC_URL + `get-order-items/${orderId}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
+  getProductById(productId: string): Observable<any> {
+    return this.http.get(BASIC_URL + `get-product/${productId}`, {
       headers: this.createAuthorizationHeader(),
     });
   }

@@ -10,6 +10,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { PostProductComponent } from './components/post-product/post-product.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderItemsComponent } from './components/order-items/order-items.component';
+import { UpdateProductComponent } from './components/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { OrderItemsComponent } from './components/order-items/order-items.compon
     PostProductComponent,
     OrdersComponent,
     OrderItemsComponent,
+    UpdateProductComponent,
   ],
   imports: [
     CommonModule,
