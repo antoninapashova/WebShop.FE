@@ -56,6 +56,16 @@ export class AdminService {
     });
   }
 
+  changeOrderStatus(orderId: string, status: string): Observable<any> {
+    return this.http.put(
+      BASIC_URL + `set-order-status/${orderId}/${status}`,
+      {},
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',

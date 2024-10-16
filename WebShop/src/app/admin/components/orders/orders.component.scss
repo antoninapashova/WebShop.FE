@@ -1,8 +1,7 @@
 .container {
-  display: flex;
-  justify-content: center;
+  margin: auto;
+  width: 98%;
   padding-top: 50px;
-  align-items: center;
 }
 
 .mat-card {
@@ -52,4 +51,8 @@ td.bold-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
   cursor: pointer;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
 }

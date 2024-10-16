@@ -68,8 +68,18 @@
               Action
             </button>
             <mat-menu #appMenu="matMenu" yPosition="below">
-              <button mat-menu-item>Shipped</button>
-              <button mat-menu-item>Delivered</button>
+              <button
+                mat-menu-item
+                (click)="changeOrderStatus(order.id, 'Shipped')"
+              >
+                Shipped
+              </button>
+              <button
+                mat-menu-item
+                (click)="changeOrderStatus(order.id, 'Delivered')"
+              >
+                Delivered
+              </button>
             </mat-menu>
           </td>
         </ng-container>

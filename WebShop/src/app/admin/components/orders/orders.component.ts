@@ -3,6 +3,7 @@ import { AdminService } from '../../service/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
+import Order from '../../interfaces/Order';
 
 @Component({
   selector: 'app-orders',
@@ -23,6 +24,7 @@ export class OrdersComponent {
     'action',
   ];
 
+  orders: Order[];
   dataSource = new MatTableDataSource();
   _paginator: MatPaginator;
 
@@ -49,6 +51,7 @@ export class OrdersComponent {
     this.adminService.getPlacedOrders().subscribe({
       next: (res) => {
         this.dataSource.data = res;
+        this.orders = res;
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Close', {
@@ -57,5 +60,32 @@ export class OrdersComponent {
         });
       },
     });
+  }
+
+  changeOrderStatus(orderId: string, status: string) {
+    this.adminService.changeOrderStatus(orderId, status).subscribe({
+      next: (res) => {
+        this.snackBar.open(res.message, 'Close', {
+          duration: 50000,
+        });
+
+        this.optimisticUpdate(orderId, status);
+      },
+      error: (err) => {
+        this.snackBar.open(err.message, 'Close', {
+          duration: 50000,
+          panelClass: 'error-snackbar',
+        });
+      },
+    });
+  }
+
+  optimisticUpdate(orderId: string, status: string) {
+    let items = this.orders.map((element) => {
+      return element.id === orderId ? { ...element, status: status } : element;
+    });
+
+    this.dataSource.data = items;
+    this.orders = items;
   }
 }
