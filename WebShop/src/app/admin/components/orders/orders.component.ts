@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import Order from '../../interfaces/Order';
+import { SharedService } from '../../service/shared/shared.service';
 
 @Component({
   selector: 'app-orders',
@@ -21,12 +22,15 @@ export class OrdersComponent {
     'deliveryDate',
     'status',
     'isApproved',
-    'action',
+    'changeStatus',
+    'showOrderItems',
   ];
 
+  cindex: number;
   orders: Order[];
   dataSource = new MatTableDataSource();
   _paginator: MatPaginator;
+  visible: boolean = false;
 
   @ViewChild(MatPaginator, { static: false }) set matPaginator(
     paginator: MatPaginator
@@ -40,11 +44,21 @@ export class OrdersComponent {
 
   constructor(
     private adminService: AdminService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private sharedService: SharedService
   ) {}
 
   ngOnInit() {
     this.getOrders();
+  }
+
+  clickEvent(index) {
+    this.cindex = index;
+  }
+
+  showOrderItems(orderId: string) {
+    this.visible = !this.visible;
+    this.sharedService.setData(orderId);
   }
 
   getOrders() {
