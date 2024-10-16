@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UserStorageService } from '../../services/storage/user-storage.service';
+import { UserStorageService } from '../../../services/storage/user-storage.service';
 
 const BASIC_URL = 'http://localhost:8080/';
 

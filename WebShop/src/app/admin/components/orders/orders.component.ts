@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { AdminService } from '../../service/admin.service';
+import { AdminService } from '../../service/admin/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
