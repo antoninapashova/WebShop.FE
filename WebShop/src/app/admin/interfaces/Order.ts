@@ -3,7 +3,7 @@ export default interface Order {
   orderDate: string;
   deliveryDate: string;
   clientName: string;
-  isApproved: boolean;
+  isApproved: string;
   orderItems: [];
   totalAmount: number;
   description: string;

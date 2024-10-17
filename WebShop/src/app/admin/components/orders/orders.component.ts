@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, booleanAttribute } from '@angular/core';
 import { AdminService } from '../../service/admin/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,8 +21,9 @@ export class OrdersComponent {
     'orderDate',
     'deliveryDate',
     'status',
-    'isApproved',
     'changeStatus',
+    'isApproved',
+    'setApprove',
     'showOrderItems',
   ];
 
@@ -83,7 +84,7 @@ export class OrdersComponent {
           duration: 50000,
         });
 
-        this.optimisticUpdate(orderId, status);
+        this.optimisticStatusUpdate(orderId, status);
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Close', {
@@ -94,7 +95,40 @@ export class OrdersComponent {
     });
   }
 
-  optimisticUpdate(orderId: string, status: string) {
+  setIsApproved(orderId: string, approved: string) {
+    let isApproved: boolean = false;
+    if (approved === 'Approved') {
+      isApproved = true;
+    }
+
+    this.adminService.setApprovedStatus(orderId, isApproved).subscribe({
+      next: (res) => {
+        this.snackBar.open(res.message, 'Close', {
+          duration: 50000,
+        });
+        this.optimisticApprovementUpdate(orderId, approved);
+      },
+      error: (err) => {
+        this.snackBar.open(err.message, 'Close', {
+          duration: 50000,
+          panelClass: 'error-snackbar',
+        });
+      },
+    });
+  }
+
+  optimisticApprovementUpdate(orderId: string, approved: string) {
+    let items = this.orders.map((element) => {
+      return element.id === orderId
+        ? { ...element, isApproved: approved }
+        : element;
+    });
+
+    this.dataSource.data = items;
+    this.orders = items;
+  }
+
+  optimisticStatusUpdate(orderId: string, status: string) {
     let items = this.orders.map((element) => {
       return element.id === orderId ? { ...element, status: status } : element;
     });

@@ -88,6 +88,16 @@ export class AdminService {
     });
   }
 
+  setApprovedStatus(orderId: string, isApproved: boolean): Observable<any> {
+    return this.http.put(
+      BASIC_URL + 'set-order-approved',
+      { orderId, isApproved },
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',
