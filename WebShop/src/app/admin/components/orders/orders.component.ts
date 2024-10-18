@@ -106,7 +106,7 @@ export class OrdersComponent {
         this.snackBar.open(res.message, 'Close', {
           duration: 50000,
         });
-        this.optimisticApprovementUpdate(orderId, approved);
+        this.optimisticApprovementUpdate(orderId, res.message);
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Close', {
