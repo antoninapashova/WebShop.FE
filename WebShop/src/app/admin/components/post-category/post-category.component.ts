@@ -31,7 +31,7 @@ export class PostCategoryComponent {
         .addCategory(this.categoryForm.value.name)
         .subscribe((res) => {
           if (res.id != null) {
-            this.snackBar.open('Categpry posted successfuly', 'Close', {
+            this.snackBar.open('Categоry posted successfuly', 'Close', {
               duration: 50000,
             });
 
