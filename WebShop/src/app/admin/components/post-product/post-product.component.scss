@@ -55,6 +55,18 @@
           font-size: 20px;
         }
       }
+
+      .circle-image {
+        position: relative;
+      }
+
+      .circle-image .close {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        z-index: 100;
+        cursor: pointer;
+      }
     }
 
     button {

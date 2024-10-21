@@ -4,6 +4,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminService } from '../../service/admin/admin.service';
 
+interface UploadedFile {
+  index: number;
+  file: File;
+}
+
+interface ImagePreviews {
+  index: number;
+  element: string;
+}
+
 @Component({
   selector: 'app-post-product',
   templateUrl: './post-product.component.html',
@@ -12,8 +22,8 @@ import { AdminService } from '../../service/admin/admin.service';
 export class PostProductComponent {
   productForm: FormGroup;
   listOfCategories: any[];
-  selectedFile: File | null;
-  imagePreview: string | ArrayBuffer | null;
+  uploadedFiles: UploadedFile[] = [];
+  imagePreviews: ImagePreviews[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,18 +33,20 @@ export class PostProductComponent {
   ) {}
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-    this.previewImage();
-  }
+    let selectedFiles: File[] = event.target.files;
 
-  previewImage() {
-    const reader = new FileReader();
+    if (selectedFiles && selectedFiles[0]) {
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const reader = new FileReader();
 
-    reader.onload = () => {
-      this.imagePreview = reader.result;
-    };
+        reader.onload = (e: any) => {
+          this.imagePreviews.push({ index: i, element: e.target.result });
+        };
 
-    reader.readAsDataURL(this.selectedFile);
+        reader.readAsDataURL(selectedFiles[i]);
+        this.uploadedFiles.push({ index: i, file: selectedFiles[i] });
+      }
+    }
   }
 
   ngOnInit() {
@@ -66,7 +78,7 @@ export class PostProductComponent {
       formData.append('quantity', this.productForm.get('quantity').value);
 
       this.adminService.addProduct(this.productForm.value).subscribe({
-        next: (res) => {
+        next: () => {
           this.snackBar.open('Product posted successfuly!', 'Close', {
             duration: 50000,
           });
@@ -83,5 +95,10 @@ export class PostProductComponent {
         this.productForm.controls[i].updateValueAndValidity();
       }
     }
+  }
+
+  onRemove(event) {
+    this.imagePreviews.splice(this.imagePreviews.indexOf(event), 1);
+    this.uploadedFiles.splice(this.uploadedFiles.indexOf(event), 1);
   }
 }
