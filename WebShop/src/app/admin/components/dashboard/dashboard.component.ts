@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AdminService } from '../../service/admin/admin.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import Product from '../../interfaces/Product';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
-  products: any[] = [];
+  products: Product[] = [];
   searchProductForm!: FormGroup;
 
   constructor(
@@ -28,9 +29,13 @@ export class DashboardComponent {
   getAllPoducts() {
     this.products = [];
     this.adminService.getAllProducts().subscribe((res) => {
-      res.forEach((element) => {
-        element.processesImg = 'data:image/jpeg;base64' + element.byteImage;
-        this.products.push(element);
+      res.forEach((product) => {
+        let mappedImages = product.images.map(
+          (i) => 'data:image/jpeg;base64,' + i.img
+        );
+
+        product.images = mappedImages;
+        this.products.push(product);
       });
     });
   }

@@ -11,6 +11,7 @@ import { PostProductComponent } from './components/post-product/post-product.com
 import { OrdersComponent } from './components/orders/orders.component';
 import { OrderItemsComponent } from './components/order-items/order-items.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { UpdateProductComponent } from './components/update-product/update-produ
     FormsModule,
     ReactiveFormsModule,
     WebShopMaterialModule,
+    SharedModule,
   ],
   providers: [provideHttpClient()],
 })

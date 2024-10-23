@@ -21,7 +21,7 @@
 <div class="product-list">
   <mat-card class="product-card" *ngFor="let product of products">
     <div class="product-image">
-      <img [src]="product.processedImage" alt="product-image" />
+      <app-carousel [slides]="product.images"></app-carousel>
     </div>
 
     <div class="product-details">
