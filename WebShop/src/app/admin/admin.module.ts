@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NO_ERRORS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
@@ -22,6 +22,7 @@ import { UpdateProductComponent } from './components/update-product/update-produ
     OrderItemsComponent,
     UpdateProductComponent,
   ],
+  schemas: [NO_ERRORS_SCHEMA],
   imports: [
     CommonModule,
     AdminRoutingModule,
