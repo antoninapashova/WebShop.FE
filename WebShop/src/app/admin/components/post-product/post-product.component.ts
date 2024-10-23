@@ -70,14 +70,15 @@ export class PostProductComponent {
   addProduct(): void {
     if (this.productForm.valid) {
       const formData: FormData = new FormData();
-      //formData.append('img', this.selectedFile);
+
+      this.uploadedFiles.forEach((e) => formData.append('images', e.file));
       formData.append('categoryId', this.productForm.get('categoryId').value);
       formData.append('name', this.productForm.get('name').value);
       formData.append('description', this.productForm.get('description').value);
       formData.append('price', this.productForm.get('price').value);
       formData.append('quantity', this.productForm.get('quantity').value);
 
-      this.adminService.addProduct(this.productForm.value).subscribe({
+      this.adminService.addProduct(formData).subscribe({
         next: () => {
           this.snackBar.open('Product posted successfuly!', 'Close', {
             duration: 50000,
