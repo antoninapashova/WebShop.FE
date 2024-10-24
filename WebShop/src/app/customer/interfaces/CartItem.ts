@@ -4,5 +4,7 @@ export default interface CartItem {
   quantity: number;
   price: number;
   highlight: string;
-  processedImage: string;
+  image: {
+    img: string;
+  };
 }

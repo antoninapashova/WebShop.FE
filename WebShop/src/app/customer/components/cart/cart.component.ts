@@ -28,12 +28,14 @@ export class CartComponent {
   getCart() {
     this.customerService.getCart().subscribe({
       next: (res) => {
-        // res.cartItems.forEach((element) => {
-        //   element.processesImg =
-        //     'data:image/jpeg;base64,' + element.returnedImg;
-        //  });
+        this.cart = res;
+        res.cartItems.forEach((element) => {
+          element.image = {
+            img: 'data:image/jpeg;base64,' + element.image.img,
+          };
 
-        this.cart = res.data;
+          this.cart.cartItems.push(element);
+        });
       },
       error: (err) => {
         this.snackBar.open(err.message, 'ERROR', {
