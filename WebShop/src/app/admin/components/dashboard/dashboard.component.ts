@@ -45,9 +45,13 @@ export class DashboardComponent {
     const title = this.searchProductForm.get('title')!.value;
 
     this.adminService.getAllProductsByName(title).subscribe((res) => {
-      res.forEach((element) => {
-        element.processesImg = 'data:image/jpeg;base64' + element.byteImage;
-        this.products.push(element);
+      res.forEach((product) => {
+        let mappedImages = product.images.map(
+          (i) => 'data:image/jpeg;base64,' + i.img
+        );
+
+        product.images = mappedImages;
+        this.products.push(product);
       });
     });
   }
