@@ -8,6 +8,7 @@ import { WebShopMaterialModule } from '../WebShopMaterialModule';
 import { provideHttpClient } from '@angular/common/http';
 import { CartComponent } from './components/cart/cart.component';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PlaceOrderComponent } from './components/place-order/place-order.compon
     FormsModule,
     ReactiveFormsModule,
     WebShopMaterialModule,
+    SharedModule,
   ],
   providers: [provideHttpClient()],
 })
