@@ -12,13 +12,7 @@ import { SharedService } from '../../service/shared/shared.service';
   styleUrl: './order-items.component.scss',
 })
 export class OrderItemsComponent {
-  displayedColumns: string[] = [
-    'trackingId',
-    'photo',
-    'name',
-    'price',
-    'quantity',
-  ];
+  displayedColumns: string[] = ['trackingId', 'name', 'price', 'quantity'];
 
   cindex: number;
   orderItems: OrderItem[];
