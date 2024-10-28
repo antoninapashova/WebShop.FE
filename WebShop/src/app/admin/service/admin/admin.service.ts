@@ -50,14 +50,10 @@ export class AdminService {
     });
   }
 
-  updateProductById(productDto: any, productId: string): Observable<any> {
-    return this.http.put(
-      BASIC_URL + `update-product/${productId}`,
-      productDto,
-      {
-        headers: this.createAuthorizationHeader(),
-      }
-    );
+  updateProductById(product: any, productId: string): Observable<any> {
+    return this.http.put(BASIC_URL + `update-product/${productId}`, product, {
+      headers: this.createAuthorizationHeader(),
+    });
   }
 
   getPlacedOrders(): Observable<any> {
@@ -92,6 +88,15 @@ export class AdminService {
     return this.http.put(
       BASIC_URL + 'set-order-approved',
       { orderId, isApproved },
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
+  }
+
+  deleteImage(productId: string, imageId: string) {
+    return this.http.delete(
+      BASIC_URL + `delete-image/${productId}/${imageId}`,
       {
         headers: this.createAuthorizationHeader(),
       }

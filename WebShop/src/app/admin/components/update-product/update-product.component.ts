@@ -4,6 +4,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../service/admin/admin.service';
 
+interface UploadedFile {
+  id: string;
+  index: number;
+  file: File;
+}
+
+interface ImagePreview {
+  index: number;
+  element: string;
+}
+
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
@@ -14,10 +25,10 @@ export class UpdateProductComponent {
 
   productForm: FormGroup;
   listOfCategories: any[];
-  selectedFile: File | null;
-  imagePreview: string | ArrayBuffer | null;
-  existingImage: string | null = null;
-  imgChanged = false;
+
+  selectedFiles: UploadedFile[] = [];
+  imagePreviews: ImagePreview[] = [];
+  existingImages: ImagePreview[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,19 +39,21 @@ export class UpdateProductComponent {
   ) {}
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-    this.previewImage();
-    this.imgChanged = true;
+    let selectedFiles: File[] = event.target.files;
 
-    this.existingImage = null;
-  }
+    if (selectedFiles && selectedFiles[0]) {
+      for (let i = 0; i < selectedFiles.length; i++) {
+        const reader = new FileReader();
 
-  previewImage() {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result;
-    };
-    reader.readAsDataURL(this.selectedFile);
+        reader.onload = (e: any) => {
+          this.imagePreviews.push({ index: i, element: e.target.result });
+          this.existingImages.push({ index: i, element: e.target.result });
+        };
+
+        this.selectedFiles.push({ id: null, index: i, file: selectedFiles[i] });
+        reader.readAsDataURL(selectedFiles[i]);
+      }
+    }
   }
 
   ngOnInit() {
@@ -50,6 +63,7 @@ export class UpdateProductComponent {
       price: [null, [Validators.required]],
       description: [null, [Validators.required]],
       quantity: [null, [Validators.required]],
+      images: [null, [Validators.required]],
     });
 
     this.getAllCategories();
@@ -65,8 +79,14 @@ export class UpdateProductComponent {
   getProductById() {
     this.adminService.getProductById(this.productId).subscribe({
       next: (res) => {
-        this.productForm.patchValue(res.data);
-        //this.existingImage = 'data:image/jpeg;base64,' + res.data.byteImg;
+        this.productForm.patchValue(res);
+        res.images.forEach((i, index) => {
+          let image = 'data:image/jpeg;base64,' + i.img;
+          const file = new File([new Blob([image])], '', {});
+
+          this.selectedFiles.push({ id: i.id, index: index, file: file });
+          this.existingImages.push({ index: index, element: image });
+        });
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Error', {
@@ -77,36 +97,54 @@ export class UpdateProductComponent {
   }
 
   updateProduct(): void {
-    if (this.productForm.valid) {
-      const formData: FormData = new FormData();
-      if (this.imgChanged && this.selectedFile) {
-        //formData.append('img', this.selectedFile);
-      }
-      formData.append('categoryId', this.productForm.get('categoryId').value);
-      formData.append('name', this.productForm.get('name').value);
-      formData.append('description', this.productForm.get('description').value);
-      formData.append('price', this.productForm.get('price').value);
-      formData.append('quantity', this.productForm.get('quantity').value);
+    const formData: FormData = new FormData();
 
-      this.adminService
-        .updateProductById(this.productForm.value, this.productId)
-        .subscribe({
-          next: (res) => {
-            this.snackBar.open(res.message, 'Close', {
-              duration: 50000,
-            });
-            this.router.navigateByUrl('/admin/dashboard');
-          },
-          error: (err) => {
-            this.snackBar.open(err.error, 'Error', {
-              duration: 50000,
-            });
-          },
-        });
-    } else {
-      for (const i in this.productForm) {
-        this.productForm.controls[i].updateValueAndValidity();
-      }
+    if (this.selectedFiles) {
+      this.selectedFiles.forEach((selectedFile) => {
+        if (selectedFile.id == null) {
+          formData.append('images', selectedFile.file);
+        } else {
+        }
+      });
     }
+
+    formData.append('categoryId', this.productForm.get('categoryId').value);
+    formData.append('name', this.productForm.get('name').value);
+    formData.append('description', this.productForm.get('description').value);
+    formData.append('price', this.productForm.get('price').value);
+    formData.append('quantity', this.productForm.get('quantity').value);
+
+    this.adminService.updateProductById(formData, this.productId).subscribe({
+      next: (res) => {
+        this.snackBar.open(res.message, 'Close', {
+          duration: 50000,
+        });
+        this.router.navigateByUrl('/admin/dashboard');
+      },
+      error: (err) => {
+        console.log(err);
+
+        this.snackBar.open(err, 'Error', {
+          duration: 50000,
+        });
+      },
+    });
+  }
+
+  onRemove(event) {
+    this.imagePreviews.splice(this.imagePreviews.indexOf(event), 1);
+
+    let removedImage = this.existingImages.splice(
+      this.existingImages.indexOf(event),
+      1
+    );
+
+    let image = this.selectedFiles.find(
+      (e) => e.index == removedImage[0].index
+    );
+
+    this.adminService
+      .deleteImage(this.productId, image.id)
+      .subscribe((res) => console.log(res));
   }
 }

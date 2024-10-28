@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Uppdate product</h2>
+  <h2>Update product</h2>
 
   <form [formGroup]="productForm" (ngSubmit)="updateProduct()">
     <div class="file-upload-container">
@@ -10,24 +10,18 @@
           id="fileInput"
           (change)="onFileSelected($event)"
           hidden
+          multiple="true"
         />
         <mat-icon>attach_file</mat-icon>
       </label>
 
-      <div *ngIf="selectedFile" class="image-preview">
-        <div class="circle-image">
+      <div *ngIf="existingImages" class="image-preview">
+        <div class="circle-image" *ngFor="let existingImage of existingImages">
+          <span class="material-icons close" (click)="onRemove($event)">
+            close
+          </span>
           <img
-            [src]="imagePreview"
-            alt="Selected Image"
-            class="preview-image"
-          />
-        </div>
-      </div>
-
-      <div *ngIf="existingImage" class="image-preview">
-        <div class="circle-image">
-          <img
-            [src]="existingImage"
+            [src]="existingImage.element"
             alt="Existing Image"
             class="preview-image"
           />
