@@ -1,5 +1,6 @@
 <div *ngIf="cart?.cartItems?.length > 0; else emptyCart">
   <div class="cart-container">
+    <h3 class="heading">Your cart</h3>
     <div class="cart-item" *ngFor="let item of cart.cartItems">
       <div class="product-info">
         <div class="product-image">
