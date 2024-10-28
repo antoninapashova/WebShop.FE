@@ -58,14 +58,14 @@ export class DashboardComponent {
 
   deleteProduct(productId: any) {
     this.adminService.deleteProduct(productId).subscribe({
-      next: () => {
-        this.snackBar.open('Categpry posted successfuly', 'Close', {
+      next: (res) => {
+        this.snackBar.open(res, 'Close', {
           duration: 50000,
         });
         this.getAllPoducts();
       },
       error: (err) => {
-        this.snackBar.open(err.message, 'Close', {
+        this.snackBar.open(err, 'Close', {
           duration: 50000,
           panelClass: 'error-snackbar',
         });
