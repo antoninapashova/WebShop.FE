@@ -34,4 +34,8 @@ export class AuthService {
       })
     );
   }
+
+  getOrderById(orderId: string): Observable<any> {
+    return this.http.get(BASIC_URL + `get-order/${orderId}`);
+  }
 }
