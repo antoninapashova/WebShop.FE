@@ -62,8 +62,13 @@ export class PostProductComponent {
   }
 
   getAllCategories() {
-    this.adminService.getAllCategories().subscribe((res) => {
-      this.listOfCategories = res;
+    this.adminService.getAllCategories().subscribe({
+      next: (res) => (this.listOfCategories = res.data),
+      error: (err) => {
+        this.snackBar.open(err.message, 'Error', {
+          duration: 50000,
+        });
+      },
     });
   }
 
@@ -79,14 +84,14 @@ export class PostProductComponent {
       formData.append('quantity', this.productForm.get('quantity').value);
 
       this.adminService.addProduct(formData).subscribe({
-        next: () => {
-          this.snackBar.open('Product posted successfuly!', 'Close', {
+        next: (res) => {
+          this.snackBar.open(res.message, 'Close', {
             duration: 50000,
           });
           this.router.navigateByUrl('/admin/dashboard');
         },
         error: (err) => {
-          this.snackBar.open(err.error, 'Error', {
+          this.snackBar.open(err.error.message, 'Error', {
             duration: 50000,
           });
         },

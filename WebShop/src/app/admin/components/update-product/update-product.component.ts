@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../service/admin/admin.service';
 
 interface UploadedFile {
-  id: string;
   index: number;
   file: File;
 }
@@ -50,7 +49,7 @@ export class UpdateProductComponent {
           this.existingImages.push({ index: i, element: e.target.result });
         };
 
-        this.selectedFiles.push({ id: null, index: i, file: selectedFiles[i] });
+        this.selectedFiles.push({ index: i, file: selectedFiles[i] });
         reader.readAsDataURL(selectedFiles[i]);
       }
     }
@@ -63,7 +62,6 @@ export class UpdateProductComponent {
       price: [null, [Validators.required]],
       description: [null, [Validators.required]],
       quantity: [null, [Validators.required]],
-      images: [null, [Validators.required]],
     });
 
     this.getAllCategories();
@@ -71,8 +69,13 @@ export class UpdateProductComponent {
   }
 
   getAllCategories() {
-    this.adminService.getAllCategories().subscribe((res) => {
-      this.listOfCategories = res;
+    this.adminService.getAllCategories().subscribe({
+      next: (res) => (this.listOfCategories = res.data),
+      error: (err) => {
+        this.snackBar.open(err.message, 'Error', {
+          duration: 50000,
+        });
+      },
     });
   }
 
@@ -84,7 +87,7 @@ export class UpdateProductComponent {
           let image = 'data:image/jpeg;base64,' + i.img;
           const file = new File([new Blob([image])], '', {});
 
-          this.selectedFiles.push({ id: i.id, index: index, file: file });
+          this.selectedFiles.push({ index: index, file: file });
           this.existingImages.push({ index: index, element: image });
         });
       },
@@ -97,54 +100,37 @@ export class UpdateProductComponent {
   }
 
   updateProduct(): void {
-    const formData: FormData = new FormData();
+    if (this.productForm.valid) {
+      const formData: FormData = new FormData();
+      this.selectedFiles.forEach((e) => formData.append('images', e.file));
+      formData.append('categoryId', this.productForm.get('categoryId').value);
+      formData.append('name', this.productForm.get('name').value);
+      formData.append('description', this.productForm.get('description').value);
+      formData.append('price', this.productForm.get('price').value);
+      formData.append('quantity', this.productForm.get('quantity').value);
 
-    if (this.selectedFiles) {
-      this.selectedFiles.forEach((selectedFile) => {
-        if (selectedFile.id == null) {
-          formData.append('images', selectedFile.file);
-        } else {
-        }
+      this.adminService.updateProductById(formData, this.productId).subscribe({
+        next: (res) => {
+          this.snackBar.open(res.message, 'Close', {
+            duration: 50000,
+          });
+          this.router.navigateByUrl('/admin/dashboard');
+        },
+        error: (err) => {
+          this.snackBar.open(err, 'Error', {
+            duration: 50000,
+          });
+        },
       });
+    } else {
+      for (let i in this.productForm.controls) {
+        this.productForm.controls[i].updateValueAndValidity();
+      }
     }
-
-    formData.append('categoryId', this.productForm.get('categoryId').value);
-    formData.append('name', this.productForm.get('name').value);
-    formData.append('description', this.productForm.get('description').value);
-    formData.append('price', this.productForm.get('price').value);
-    formData.append('quantity', this.productForm.get('quantity').value);
-
-    this.adminService.updateProductById(formData, this.productId).subscribe({
-      next: (res) => {
-        this.snackBar.open(res.message, 'Close', {
-          duration: 50000,
-        });
-        this.router.navigateByUrl('/admin/dashboard');
-      },
-      error: (err) => {
-        console.log(err);
-
-        this.snackBar.open(err, 'Error', {
-          duration: 50000,
-        });
-      },
-    });
   }
 
   onRemove(event) {
     this.imagePreviews.splice(this.imagePreviews.indexOf(event), 1);
-
-    let removedImage = this.existingImages.splice(
-      this.existingImages.indexOf(event),
-      1
-    );
-
-    let image = this.selectedFiles.find(
-      (e) => e.index == removedImage[0].index
-    );
-
-    this.adminService
-      .deleteImage(this.productId, image.id)
-      .subscribe((res) => console.log(res));
+    this.existingImages.splice(this.selectedFiles.indexOf(event), 1);
   }
 }
