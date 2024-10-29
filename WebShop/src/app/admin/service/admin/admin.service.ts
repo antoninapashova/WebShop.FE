@@ -94,7 +94,7 @@ export class AdminService {
     );
   }
 
-  deleteImage(productId: string, imageId: string) {
+  deleteImage(productId: string, imageId: string): Observable<any> {
     return this.http.delete(
       BASIC_URL + `delete-image/${productId}/${imageId}`,
       {
