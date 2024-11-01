@@ -28,12 +28,10 @@ export class CartComponent {
     this.customerService.getCart().subscribe({
       next: (res) => {
         this.cart = res;
-        res.cartItems.forEach((element) => {
+        this.cart.cartItems.forEach((element) => {
           element.image = {
             img: 'data:image/jpeg;base64,' + element.image.img,
           };
-
-          this.cart.cartItems.push(element);
         });
       },
       error: (err) => {
