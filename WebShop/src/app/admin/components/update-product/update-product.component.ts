@@ -4,16 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from '../../service/admin/admin.service';
 
-interface UploadedFile {
-  index: number;
-  file: File;
-}
-
-interface ImagePreview {
-  index: number;
-  element: string;
-}
-
 @Component({
   selector: 'app-update-product',
   templateUrl: './update-product.component.html',
@@ -24,10 +14,8 @@ export class UpdateProductComponent {
 
   productForm: FormGroup;
   listOfCategories: any[];
-
-  selectedFiles: UploadedFile[] = [];
-  imagePreviews: ImagePreview[] = [];
-  existingImages: ImagePreview[] = [];
+  imagePreviews: string[] = [];
+  imagesToSend: BinaryType[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,11 +33,11 @@ export class UpdateProductComponent {
         const reader = new FileReader();
 
         reader.onload = (e: any) => {
-          this.imagePreviews.push({ index: i, element: e.target.result });
-          this.existingImages.push({ index: i, element: e.target.result });
+          const base64String = e.target.result.split(',')[1];
+          this.imagePreviews.push(e.target.result);
+          this.imagesToSend.push(base64String);
         };
 
-        this.selectedFiles.push({ index: i, file: selectedFiles[i] });
         reader.readAsDataURL(selectedFiles[i]);
       }
     }
@@ -83,12 +71,12 @@ export class UpdateProductComponent {
     this.adminService.getProductById(this.productId).subscribe({
       next: (res) => {
         this.productForm.patchValue(res);
-        res.images.forEach((i, index) => {
-          let image = 'data:image/jpeg;base64,' + i.img;
-          const file = new File([new Blob([image])], '', {});
-
-          this.selectedFiles.push({ index: index, file: file });
-          this.existingImages.push({ index: index, element: image });
+        res.images.forEach((i) => {
+          let image = i.img.startsWith('data:image/')
+            ? i.img
+            : 'data:image/jpeg;base64,' + i.img;
+          this.imagePreviews.push(image);
+          this.imagesToSend.push(i.img);
         });
       },
       error: (err) => {
@@ -102,7 +90,18 @@ export class UpdateProductComponent {
   updateProduct(): void {
     if (this.productForm.valid) {
       const formData: FormData = new FormData();
-      this.selectedFiles.forEach((e) => formData.append('images', e.file));
+
+      this.imagesToSend.forEach((base64Image) => {
+        const byteCharacters = atob(base64Image);
+        const byteNumbers = new Array(byteCharacters.length);
+        for (let i = 0; i < byteCharacters.length; i++) {
+          byteNumbers[i] = byteCharacters.charCodeAt(i);
+        }
+        const byteArray = new Uint8Array(byteNumbers);
+        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+        formData.append('images', blob);
+      });
+
       formData.append('categoryId', this.productForm.get('categoryId').value);
       formData.append('name', this.productForm.get('name').value);
       formData.append('description', this.productForm.get('description').value);
@@ -131,6 +130,6 @@ export class UpdateProductComponent {
 
   onRemove(event) {
     this.imagePreviews.splice(this.imagePreviews.indexOf(event), 1);
-    this.existingImages.splice(this.selectedFiles.indexOf(event), 1);
+    this.imagesToSend.splice(this.imagesToSend.indexOf(event), 1);
   }
 }
