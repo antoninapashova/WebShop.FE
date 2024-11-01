@@ -54,13 +54,15 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.signupForm);
+
     this.authService.register(this.signupForm.value).subscribe({
-      next: () => {
-        this.snackBar.open('Signup successful!', 'Close', { duration: 5000 });
+      next: (res) => {
+        this.snackBar.open(res.message, 'Close', { duration: 5000 });
         this.router.navigateByUrl('/login');
       },
-      error: () => {
-        this.snackBar.open('Sign up failed. Plese try again', 'Close', {
+      error: (err) => {
+        this.snackBar.open(err.error.message, 'Close', {
           duration: 5000,
           panelClass: 'eroro-snackbar',
         });
