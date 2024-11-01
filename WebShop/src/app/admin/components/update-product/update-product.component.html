@@ -15,16 +15,12 @@
         <mat-icon>attach_file</mat-icon>
       </label>
 
-      <div *ngIf="existingImages" class="image-preview">
-        <div class="circle-image" *ngFor="let existingImage of existingImages">
+      <div *ngIf="imagePreviews" class="image-preview">
+        <div class="circle-image" *ngFor="let preview of imagePreviews">
           <span class="material-icons close" (click)="onRemove($event)">
             close
           </span>
-          <img
-            [src]="existingImage.element"
-            alt="Existing Image"
-            class="preview-image"
-          />
+          <img [src]="preview" alt="Preview Image" class="preview-image" />
         </div>
       </div>
     </div>
