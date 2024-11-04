@@ -1,4 +1,4 @@
-import { Component, ViewChild, booleanAttribute } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AdminService } from '../../service/admin/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
