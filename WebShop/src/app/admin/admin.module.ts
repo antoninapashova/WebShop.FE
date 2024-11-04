@@ -12,6 +12,8 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { OrderItemsComponent } from './components/order-items/order-items.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
 import { SharedModule } from '../shared/shared.module';
+import { PostCouponComponent } from './components/post-coupon/post-coupon.component';
+import { CouponsComponent } from './components/coupons/coupons.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { SharedModule } from '../shared/shared.module';
     OrdersComponent,
     OrderItemsComponent,
     UpdateProductComponent,
+    PostCouponComponent,
+    CouponsComponent,
   ],
   schemas: [NO_ERRORS_SCHEMA],
   imports: [
