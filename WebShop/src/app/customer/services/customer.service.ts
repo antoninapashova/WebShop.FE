@@ -58,6 +58,12 @@ export class CustomerService {
     });
   }
 
+  getDiscount(code: string): Observable<any> {
+    return this.http.get(BASIC_URL + `coupon/${code}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerService } from '../../services/customer.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -13,15 +13,43 @@ import { PlaceOrderComponent } from '../place-order/place-order.component';
 })
 export class CartComponent {
   cart: Cart;
+  couponForm!: FormGroup;
+  amountAfterDiscount: number;
+  couponCode: any;
 
   constructor(
     private customerService: CustomerService,
     private snackBar: MatSnackBar,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.couponForm = this.fb.group({
+      code: [null, [Validators.required]],
+    });
+
     this.getCart();
+  }
+
+  applyCoupon() {
+    this.customerService
+      .getDiscount(this.couponForm.get(['code'])!.value)
+      .subscribe({
+        next: (res) => {
+          const discount = res.data.discount;
+          const totalPrice = this.cart.totalPrice;
+          this.amountAfterDiscount =
+            totalPrice - (totalPrice * discount) / 100.0;
+          this.couponCode = res.data.code;
+        },
+        error: (err) => {
+          this.snackBar.open(err.error.message, 'ERROR', {
+            duration: 50000,
+            panelClass: 'error-snackbar',
+          });
+        },
+      });
   }
 
   getCart() {
@@ -64,7 +92,7 @@ export class CartComponent {
   }
 
   placeOrder() {
-    this.matDialog.open(PlaceOrderComponent);
+    this.matDialog.open(PlaceOrderComponent, { data: this.couponCode });
   }
 
   optimisticUpdate(itemId: string, isIncreaseChange: boolean) {
