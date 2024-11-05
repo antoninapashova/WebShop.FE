@@ -78,6 +78,29 @@ button.mat-raised-button:hover {
   background-color: #1976d2;
 }
 
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 600px;
+  position: absolute;
+  top: 34%;
+  left: 34%;
+  margin-top: -50px;
+  margin-left: -50px;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+  span {
+    font-size: 18px;
+    color: #616161;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}
+
 button.mat-raised-button:focus {
   display: flex;
   flex-direction: column;
