@@ -38,6 +38,9 @@
     <div class="total-price">
       Total Amount: {{ cart?.totalPrice | currency }}
     </div>
+    <div class="total-price" *ngIf="amountAfterDiscount">
+      Amount after discount: {{ amountAfterDiscount | currency }}
+    </div>
 
     <div>
       <button mat-raised-button color="primary" (click)="placeOrder()">
@@ -45,11 +48,26 @@
       </button>
     </div>
   </div>
+
+  <div class="container">
+    <form [formGroup]="couponForm" (ngSubmit)="applyCoupon()">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Code</mat-label>
+        <input matInput type="text" placeholder="Code" formControlName="code" />
+        <mat-error *ngIf="couponForm.controls['code'].errors?.['required']"
+          >This input is required</mat-error
+        >
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        Apply Coupon
+      </button>
+    </form>
+  </div>
 </div>
 
 <ng-template #emptyCart>
   <div class="empty-cart">
-    <mat-icon class="icon"> remove_choppimg_cart</mat-icon>
+    <mat-icon class="icon"> remove_shopping_cart</mat-icon>
     <span>Cart is empty.</span>
   </div>
 </ng-template>
