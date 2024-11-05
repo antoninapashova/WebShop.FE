@@ -37,11 +37,9 @@ export class PlaceOrderComponent {
 
     this.customerService.placeOrder(formData).subscribe({
       next: (res) => {
-        this.snackBar.open(res.message, 'Close', {
-          duration: 50000,
-        });
-
+        this.snackBar.open(res.message, 'Close', { duration: 5000 });
         this.router.navigateByUrl('/customer/dashboard');
+        this.closeForm();
       },
       error: (err) => {
         this.snackBar.open(err.message, 'ERROR', {
