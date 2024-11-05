@@ -9,6 +9,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { CartComponent } from './components/cart/cart.component';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { SharedModule } from '../shared/shared.module';
+import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
     DashboardComponent,
     CartComponent,
     PlaceOrderComponent,
+    UserOrdersComponent,
   ],
   imports: [
     CommonModule,

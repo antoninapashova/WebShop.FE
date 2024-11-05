@@ -1,0 +1,52 @@
+<div *ngIf="orders?.length > 0; else noOrders">
+  <h2 class="heading">Your orders</h2>
+  <div class="order-container" *ngFor="let order of orders">
+    <div class="order-details-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> Order details </mat-card-title>
+        </mat-card-header>
+        <div class="order-detail">
+          Address: <strong>{{ order.address }}</strong>
+        </div>
+        <div class="order-detail">
+          Status: <strong>{{ order.status }}</strong>
+        </div>
+        <div class="order-detail">
+          Amount: <strong>{{ order.totalAmount }}</strong>
+        </div>
+        <div class="order-detail">
+          Order date: <strong>{{ order.orderDate }}</strong>
+        </div>
+      </mat-card>
+    </div>
+
+    <div class="order-item" *ngFor="let item of order.items">
+      <div class="product-info">
+        <div class="product-image">
+          <img [src]="item.img" alt="product-image" />
+        </div>
+        <div class="product-details">
+          <div class="item-row">
+            <div class="item-name" [ngClass]="{ highlight: item.highlight }">
+              {{ item?.name }}
+            </div>
+            <div class="item-price">
+              {{ item?.price | currency }}
+            </div>
+            <div class="quantity">
+              {{ item?.quantity }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noOrders>
+  <div class="empty-cart">
+    <mat-icon class="icon"> remove_shopping_cart</mat-icon>
+    <span>You haven't done any orders yet</span>
+  </div>
+</ng-template>

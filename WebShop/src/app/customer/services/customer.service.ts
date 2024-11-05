@@ -70,6 +70,12 @@ export class CustomerService {
     });
   }
 
+  getCustomerOrders() {
+    return this.http.get(BASIC_URL + 'user/orders', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',
