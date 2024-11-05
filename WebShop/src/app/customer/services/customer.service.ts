@@ -64,6 +64,12 @@ export class CustomerService {
     });
   }
 
+  deleteItem(id: string): Observable<any> {
+    return this.http.delete(BASIC_URL + `delete/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',

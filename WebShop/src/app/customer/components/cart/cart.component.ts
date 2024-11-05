@@ -5,6 +5,7 @@ import { CustomerService } from '../../services/customer.service';
 import { MatDialog } from '@angular/material/dialog';
 import Cart from '../../interfaces/Cart';
 import { PlaceOrderComponent } from '../place-order/place-order.component';
+import CartItem from '../../interfaces/CartItem';
 
 @Component({
   selector: 'app-cart',
@@ -81,7 +82,7 @@ export class CartComponent {
             duration: 50000,
           });
 
-          this.optimisticUpdate(itemId, isIncreaseChange);
+          this.optimisticQuantityUpdate(itemId, isIncreaseChange);
         },
         error: (err) => {
           this.snackBar.open(err.message, 'ERROR', {
@@ -92,11 +93,34 @@ export class CartComponent {
       });
   }
 
+  deleteItem(id: string) {
+    this.customerService.deleteItem(id).subscribe({
+      next: (res) => {
+        this.snackBar.open(res.message, 'Close', {
+          duration: 50000,
+        });
+
+        this.optimisticItemsUpdate(id);
+      },
+      error: (err) => {
+        this.snackBar.open(err.error.message, 'ERROR', {
+          duration: 50000,
+          panelClass: 'error-snackbar',
+        });
+      },
+    });
+  }
+
   placeOrder() {
     this.matDialog.open(PlaceOrderComponent, { data: this.couponCode });
   }
 
-  optimisticUpdate(itemId: string, isIncreaseChange: boolean) {
+  optimisticItemsUpdate(itemId: string) {
+    let items = this.cart.cartItems.filter((e) => e.id != itemId);
+    this.optmisticUpdate(items);
+  }
+
+  optimisticQuantityUpdate(itemId: string, isIncreaseChange: boolean) {
     let items = this.cart.cartItems.map((element) => {
       if (isIncreaseChange) {
         return element.id == itemId
@@ -109,6 +133,10 @@ export class CartComponent {
       }
     });
 
+    this.optmisticUpdate(items);
+  }
+
+  optmisticUpdate(items: CartItem[]) {
     let totalPrice = items.reduce(
       (accumulator, item) => (accumulator += item.price * item.quantity),
       0

@@ -23,7 +23,10 @@
                 <mat-icon>remove_circle_outline</mat-icon>
               </button>
               <span class="quantity">{{ item?.quantity }}</span>
-              <button (click)="changeItemQuantity(item?.id, true)">
+              <button
+                mat-icon-button
+                (click)="changeItemQuantity(item?.id, true)"
+              >
                 <mat-icon>add_circle_outline</mat-icon>
               </button>
               <div class="total-price">
@@ -31,6 +34,15 @@
               </div>
             </div>
           </div>
+        </div>
+        <div>
+          <button
+            mat-icon-button
+            (click)="deleteItem(item?.id)"
+            class="delete-item"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
         </div>
       </div>
     </div>
