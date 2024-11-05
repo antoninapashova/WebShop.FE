@@ -1,6 +1,5 @@
 <div class="container">
   <h2>Update product</h2>
-
   <form [formGroup]="productForm" (ngSubmit)="updateProduct()">
     <div class="file-upload-container">
       <label class="file-upload-label">
@@ -14,7 +13,6 @@
         />
         <mat-icon>attach_file</mat-icon>
       </label>
-
       <div *ngIf="imagePreviews" class="image-preview">
         <div class="circle-image" *ngFor="let preview of imagePreviews">
           <span class="material-icons close" (click)="onRemove($event)">
@@ -24,7 +22,6 @@
         </div>
       </div>
     </div>
-
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Select Category</mat-label>
       <mat-select formControlName="categoryId" name="categoryId">
@@ -39,7 +36,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Name</mat-label>
       <input matInput type="text" placeholder="Name" formControlName="name" />
@@ -47,7 +43,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Price</mat-label>
       <input
@@ -60,7 +55,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Quantity</mat-label>
       <input
@@ -73,7 +67,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Description</mat-label>
       <textarea
@@ -87,7 +80,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <button mat-raised-button color="primary" type="submit">
       Update product
     </button>

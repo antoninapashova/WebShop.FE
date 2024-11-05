@@ -54,8 +54,6 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signupForm);
-
     this.authService.register(this.signupForm.value).subscribe({
       next: (res) => {
         this.snackBar.open(res.message, 'Close', { duration: 5000 });

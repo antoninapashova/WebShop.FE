@@ -58,11 +58,10 @@ export class CartComponent {
     this.customerService.getCart().subscribe({
       next: (res) => {
         this.cart = res;
-        this.cart.cartItems.forEach((element) => {
-          element.image = {
-            img: 'data:image/jpeg;base64,' + element.image.img,
-          };
-        });
+        this.cart.cartItems.forEach(
+          (element) =>
+            (element.image = 'data:image/jpeg;base64,' + element.image)
+        );
       },
       error: (err) => {
         this.snackBar.open(err.message, 'ERROR', {

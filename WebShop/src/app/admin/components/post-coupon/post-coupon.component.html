@@ -1,6 +1,5 @@
 <div class="container">
   <h2>Add coupon</h2>
-
   <form [formGroup]="couponForm" (ngSubmit)="addCoupon()">
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Name</mat-label>
@@ -9,7 +8,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Code</mat-label>
       <input matInput type="text" placeholder="Code" formControlName="code" />
@@ -17,7 +15,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Discount %</mat-label>
       <input
@@ -30,7 +27,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <mat-form-field appearance="outline" class="form-field">
       <mat-label>Exporation Date</mat-label>
       <input
@@ -49,7 +45,6 @@
         >This input is required</mat-error
       >
     </mat-form-field>
-
     <button mat-raised-button type="submit" [disabled]="couponForm.invalid">
       Post coupon
     </button>

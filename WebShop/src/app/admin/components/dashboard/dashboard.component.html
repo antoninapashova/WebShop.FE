@@ -7,7 +7,6 @@
     <mat-label>Enter Keyword to search</mat-label>
     <input matInput type="text" placeholder="Name" formControlName="title" />
   </mat-form-field>
-
   <button
     mat-raised-button
     color="primary"
@@ -17,17 +16,14 @@
     <mat-icon>search</mat-icon>
   </button>
 </form>
-
 <div class="product-list">
   <mat-card class="product-card" *ngFor="let product of products">
     <div class="product-image">
       <app-carousel [slides]="product.images"></app-carousel>
     </div>
-
     <div class="product-details">
       <h2 class="product-name">{{ product.name }}</h2>
       <p class="product-description">{{ product.description }}</p>
-
       <mat-divider></mat-divider>
       <div class="product-info">
         <div class="info-row">
