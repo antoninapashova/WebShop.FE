@@ -16,6 +16,7 @@ export class CartComponent {
   couponForm!: FormGroup;
   amountAfterDiscount: number;
   couponCode: any;
+  discount: number;
 
   constructor(
     private customerService: CustomerService,
@@ -37,10 +38,10 @@ export class CartComponent {
       .getDiscount(this.couponForm.get(['code'])!.value)
       .subscribe({
         next: (res) => {
-          const discount = res.data.discount;
+          this.discount = res.data.discount;
           const totalPrice = this.cart.totalPrice;
           this.amountAfterDiscount =
-            totalPrice - (totalPrice * discount) / 100.0;
+            totalPrice - (totalPrice * this.discount) / 100.0;
           this.couponCode = res.data.code;
         },
         error: (err) => {
@@ -112,6 +113,9 @@ export class CartComponent {
       (accumulator, item) => (accumulator += item.price * item.quantity),
       0
     );
+
     this.cart = { ...this.cart, cartItems: items, totalPrice };
+    this.amountAfterDiscount =
+      totalPrice - (totalPrice * this.discount) / 100.0;
   }
 }
