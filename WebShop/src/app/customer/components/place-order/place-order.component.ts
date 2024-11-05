@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomerService } from '../../services/customer.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-place-order',
@@ -18,7 +18,8 @@ export class PlaceOrderComponent {
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private router: Router,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    @Inject(MAT_DIALOG_DATA) public data: string
   ) {}
 
   ngOnInit() {
@@ -29,13 +30,18 @@ export class PlaceOrderComponent {
   }
 
   placeOrder() {
-    this.customerService.placeOrder(this.orderForm.value).subscribe({
+    const formData: FormData = new FormData();
+    formData.append('couponCode', this.data.toString());
+    formData.append('address', this.orderForm.get('address').value);
+    formData.append('description', this.orderForm.get('description').value);
+
+    this.customerService.placeOrder(formData).subscribe({
       next: (res) => {
         this.snackBar.open(res.message, 'Close', {
           duration: 50000,
         });
 
-        // this.router.navigateByUrl('/customer/my-orders');
+        this.router.navigateByUrl('/customer/dashboard');
       },
       error: (err) => {
         this.snackBar.open(err.message, 'ERROR', {
