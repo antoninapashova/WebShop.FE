@@ -8,6 +8,7 @@ import { OrdersComponent } from './components/orders/orders.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
 import { PostCouponComponent } from './components/post-coupon/post-coupon.component';
 import { CouponsComponent } from './components/coupons/coupons.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'orders', component: OrdersComponent },
   { path: 'post-coupon', component: PostCouponComponent },
   { path: 'coupons', component: CouponsComponent },
+  { path: 'analytics', component: AnalyticsComponent },
 ];
 
 @NgModule({

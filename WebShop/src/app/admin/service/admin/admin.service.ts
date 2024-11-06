@@ -115,6 +115,12 @@ export class AdminService {
     });
   }
 
+  getAnalytics(): Observable<any> {
+    return this.http.get(BASIC_URL + 'order/analytics', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',

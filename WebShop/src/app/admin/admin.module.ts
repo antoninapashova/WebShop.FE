@@ -14,6 +14,8 @@ import { UpdateProductComponent } from './components/update-product/update-produ
 import { SharedModule } from '../shared/shared.module';
 import { PostCouponComponent } from './components/post-coupon/post-coupon.component';
 import { CouponsComponent } from './components/coupons/coupons.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { OrderByStatusComponent } from './components/order-by-status/order-by-status.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { CouponsComponent } from './components/coupons/coupons.component';
     UpdateProductComponent,
     PostCouponComponent,
     CouponsComponent,
+    AnalyticsComponent,
+    OrderByStatusComponent,
   ],
   schemas: [NO_ERRORS_SCHEMA],
   imports: [
