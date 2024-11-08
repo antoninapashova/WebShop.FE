@@ -17,6 +17,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { MatTableModule } from '@angular/material/table';
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSidenavModule,
   ],
   exports: [
     MatButtonModule,
@@ -60,6 +62,7 @@ import { MatTableModule } from '@angular/material/table';
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSidenavModule,
   ],
 })
 export class WebShopMaterialModule {}

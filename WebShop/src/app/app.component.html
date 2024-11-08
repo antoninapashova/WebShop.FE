@@ -74,5 +74,119 @@
     </button>
   </mat-toolbar>
 </div>
-
 <router-outlet></router-outlet>
+
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <mat-icon style="color: black">menu</mat-icon>
+  </button>
+  <span class="navbar-brand">WebShop</span>
+</mat-toolbar>
+
+<mat-sidenav-container autosize>
+  <mat-sidenav
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isMobile ? 'false' : 'true'"
+  >
+    <mat-nav-list>
+      <div *ngIf="!isCustommerLoggedIn && !isAdminLoggedIn" class="navbar">
+        <button mat-button routerLink="/login" routerLinkActive="active">
+          Sign in
+        </button>
+        <button mat-button routerLink="/register" routerLinkActive="active">
+          Sign up
+        </button>
+        <button mat-button routerLink="/order" routerLinkActive="active">
+          Track order
+        </button>
+      </div>
+
+      <div *ngIf="isAdminLoggedIn">
+        <button
+          mat-button
+          routerLink="/admin/dashboard"
+          routerLinkActive="active"
+        >
+          Dashboard
+        </button>
+        <button
+          mat-button
+          routerLink="/admin/analytics"
+          routerLinkActive="active"
+        >
+          Analytics
+        </button>
+        <button
+          mat-button
+          routerLink="/admin/category"
+          routerLinkActive="active"
+        >
+          Category
+        </button>
+        <button mat-button routerLink="/admin/orders" routerLinkActive="active">
+          Orders
+        </button>
+        <button
+          mat-button
+          routerLink="/admin/product"
+          routerLinkActive="active"
+        >
+          Products
+        </button>
+        <button
+          mat-button
+          routerLink="/admin/post-coupon"
+          routerLinkActive="active"
+        >
+          Post Coupon
+        </button>
+        <button
+          mat-button
+          routerLink="/admin/coupons"
+          routerLinkActive="active"
+        >
+          Coupons
+        </button>
+        <button mat-button routerLinkActive="active" (click)="logout()">
+          Logout
+        </button>
+      </div>
+      <div *ngIf="isCustommerLoggedIn">
+        <button
+          mat-button
+          routerLink="/customer/dashboard"
+          routerLinkActive="active"
+        >
+          Dashboard
+        </button>
+        <button
+          mat-button
+          routerLink="/customer/cart"
+          routerLinkActive="active"
+        >
+          Cart
+        </button>
+        <button
+          mat-button
+          routerLink="/customer/orders"
+          routerLinkActive="active"
+        >
+          Orders
+        </button>
+        <button
+          mat-button
+          routerLink="/customer/profile"
+          routerLinkActive="active"
+        >
+          Profile
+        </button>
+        <button mat-button routerLinkActive="active" (click)="logout()">
+          Sign out
+        </button>
+      </div>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
