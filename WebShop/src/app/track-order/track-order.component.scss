@@ -66,3 +66,16 @@
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .search-input {
+    max-width: 400px;
+  }
+
+  .order-details-container {
+    mat-card {
+      max-width: 426px;
+      margin-top: -113px;
+    }
+  }
+}
