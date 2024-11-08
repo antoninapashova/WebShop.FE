@@ -62,7 +62,7 @@ export class SignupComponent implements OnInit {
       error: (err) => {
         this.snackBar.open(err.error.message, 'Close', {
           duration: 5000,
-          panelClass: 'eroro-snackbar',
+          panelClass: 'error-snackbar',
         });
       },
     });
