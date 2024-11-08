@@ -53,3 +53,14 @@ mat-card-title {
   background-color: #f5f5f5;
   margin-top: 10px;
 }
+
+@media screen and (max-width: 600px) {
+  .analytics-container {
+    padding: 0px;
+    gap: 1rem;
+  }
+
+  .analytics-card {
+    width: 45%;
+  }
+}

@@ -57,35 +57,6 @@
   padding: 20px;
 }
 
-.search-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 7rem;
-
-  .search-input {
-    width: 100%;
-    max-width: 450px;
-    margin-bottom: 20px;
-
-    mat-label {
-      font-size: 16px;
-    }
-
-    mat-icon {
-      font-size: 24px;
-    }
-
-    input {
-      font-size: 16px;
-    }
-
-    button {
-      font-size: 16px;
-    }
-  }
-}
-
 .order-details-container {
   display: flex;
   justify-content: center;
@@ -126,19 +97,10 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .order-container {
-    max-width: 100%;
-    margin: 2em auto;
-  }
-
-  .container {
-    padding: 10px;
-
-    form {
-      mat-form-field {
-        margin-bottom: 10px;
-      }
-    }
+    flex-direction: column;
+    gap: 10px;
+    max-width: 80%;
   }
 }

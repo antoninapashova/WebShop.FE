@@ -91,3 +91,11 @@
     }
   }
 }
+
+@media screen and (max-width: 500px) {
+  .product-list {
+    .product-card {
+      width: 100%;
+    }
+  }
+}

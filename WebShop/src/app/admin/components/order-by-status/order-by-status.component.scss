@@ -44,3 +44,25 @@ mat-card-title {
   font-weight: bold;
   margin-top: 10px;
 }
+
+@media screen and (max-width: 500px) {
+  .order-status-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .order-status-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .status-value {
+    margin-top: 22px;
+  }
+
+  mat-card-header {
+    align-items: last baseline;
+  }
+}
