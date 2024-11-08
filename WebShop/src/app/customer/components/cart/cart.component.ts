@@ -59,8 +59,7 @@ export class CartComponent {
       next: (res) => {
         this.cart = res;
         this.cart.cartItems.forEach(
-          (element) =>
-            (element.image = 'data:image/jpeg;base64,' + element.image)
+          (element) => (element.img = 'data:image/jpeg;base64,' + element.img)
         );
       },
       error: (err) => {

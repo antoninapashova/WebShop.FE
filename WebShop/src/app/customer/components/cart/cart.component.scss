@@ -150,7 +150,12 @@ form {
 @media (max-width: 600px) {
   .cart-container {
     max-width: 500px;
+    width: 87%;
     margin: 2em auto;
+  }
+
+  .empty-cart {
+    width: 300px;
   }
 
   .container {
