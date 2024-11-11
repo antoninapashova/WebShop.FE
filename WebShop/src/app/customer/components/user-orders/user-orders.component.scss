@@ -1,8 +1,12 @@
+.user-orders {
+  padding: 7px;
+}
+
 .order-container {
   display: flex;
   flex-direction: row;
-  gap: 25px;
-  max-width: 50%;
+  gap: 13px;
+  max-width: 60%;
   margin: 2em auto;
   padding: 7px;
   border: 1px solid #ccc;
@@ -13,6 +17,13 @@
 .heading {
   max-width: 300px;
   margin: 2em auto;
+}
+
+.order-items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .order-item {

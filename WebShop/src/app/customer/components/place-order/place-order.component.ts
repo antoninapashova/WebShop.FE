@@ -12,6 +12,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 })
 export class PlaceOrderComponent {
   orderForm!: FormGroup;
+  trackingId: string;
 
   constructor(
     private customerService: CustomerService,
@@ -31,7 +32,9 @@ export class PlaceOrderComponent {
 
   placeOrder() {
     const formData: FormData = new FormData();
-    formData.append('couponCode', this.data.toString());
+    if (this.data != null) {
+      formData.append('couponCode', this.data.toString());
+    }
     formData.append('address', this.orderForm.get('address').value);
     formData.append('description', this.orderForm.get('description').value);
 
@@ -39,10 +42,10 @@ export class PlaceOrderComponent {
       next: (res) => {
         this.snackBar.open(res.message, 'Close', { duration: 5000 });
         this.router.navigateByUrl('/customer/dashboard');
-        this.closeForm();
+        this.trackingId = res.data;
       },
       error: (err) => {
-        this.snackBar.open(err.message, 'ERROR', {
+        this.snackBar.open(err.error.message, 'ERROR', {
           duration: 50000,
           panelClass: 'error-snackbar',
         });

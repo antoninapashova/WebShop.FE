@@ -55,19 +55,11 @@ export class CartComponent {
   }
 
   getCart() {
-    this.customerService.getCart().subscribe({
-      next: (res) => {
-        this.cart = res;
-        this.cart.cartItems.forEach(
-          (element) => (element.img = 'data:image/jpeg;base64,' + element.img)
-        );
-      },
-      error: (err) => {
-        this.snackBar.open(err.message, 'ERROR', {
-          duration: 50000,
-          panelClass: 'error-snackbar',
-        });
-      },
+    this.customerService.getCart().subscribe((res) => {
+      this.cart = res;
+      this.cart.cartItems.forEach(
+        (element) => (element.img = 'data:image/jpeg;base64,' + element.img)
+      );
     });
   }
 
@@ -83,7 +75,7 @@ export class CartComponent {
           this.optimisticQuantityUpdate(itemId, isIncreaseChange);
         },
         error: (err) => {
-          this.snackBar.open(err.message, 'ERROR', {
+          this.snackBar.open(err.error.message, 'ERROR', {
             duration: 50000,
             panelClass: 'error-snackbar',
           });

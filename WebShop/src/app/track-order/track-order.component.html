@@ -1,6 +1,6 @@
 <form [formGroup]="searchOrderForm" class="search-form" (submit)="submitForm()">
   <mat-form-field appearence="outline" class="search-input">
-    <mat-label>Enter Tracking ID to search</mat-label>
+    <mat-label>Enter order number</mat-label>
     <input matInput formControlName="id" />
     <button
       mat-button
@@ -18,7 +18,6 @@
     <mat-card-header>
       <mat-card-title> Order details </mat-card-title>
     </mat-card-header>
-
     <div class="order-detail">
       TrackingID: <strong>{{ order.id }}</strong>
     </div>
@@ -31,11 +30,9 @@
     <div class="order-detail">
       Status: <strong>{{ order.status }}</strong>
     </div>
-
     <div class="order-detail">
       Amount: <strong>{{ order.totalAmount }}</strong>
     </div>
-
     <div class="order-detail">
       Date: <strong>{{ order.deliveryDate }}</strong>
     </div>
