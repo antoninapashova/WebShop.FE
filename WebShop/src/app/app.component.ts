@@ -35,9 +35,7 @@ export class AppComponent {
       this.isAdminLoggedIn = UserStorageService.isAdminLoggedIn();
 
       if (event instanceof NavigationEnd) {
-        console.log(this.isBannerVisible);
         this.isBannerVisible = event.url !== '/';
-        console.log(this.isBannerVisible);
       }
     });
   }
