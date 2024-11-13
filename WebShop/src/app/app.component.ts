@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { UserStorageService } from './services/storage/user-storage.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
@@ -11,10 +11,10 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class AppComponent {
   title = 'WebShop';
-  @ViewChild(MatSidenav)
-  sidenav!: MatSidenav;
+  @ViewChild(MatSidenav) sidenav!: MatSidenav;
   isMobile = true;
   isCollapsed = true;
+  isBannerVisible = false;
 
   isCustommerLoggedIn: boolean = UserStorageService.isCustomerLoggedIn();
   isAdminLoggedIn: boolean = UserStorageService.isAdminLoggedIn();
@@ -30,9 +30,15 @@ export class AppComponent {
       }
     });
 
-    this.router.events.subscribe(() => {
+    this.router.events.subscribe((event: NavigationEnd) => {
       this.isCustommerLoggedIn = UserStorageService.isCustomerLoggedIn();
       this.isAdminLoggedIn = UserStorageService.isAdminLoggedIn();
+
+      if (event instanceof NavigationEnd) {
+        console.log(this.isBannerVisible);
+        this.isBannerVisible = event.url !== '/';
+        console.log(this.isBannerVisible);
+      }
     });
   }
 

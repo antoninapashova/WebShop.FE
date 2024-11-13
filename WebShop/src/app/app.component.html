@@ -91,6 +91,10 @@
       </button>
     </mat-toolbar>
   </div>
+  <app-banner
+    [appHideByClass]="'banner'"
+    [appHideElement]="isBannerVisible"
+  ></app-banner>
   <router-outlet></router-outlet>
 </div>
 
