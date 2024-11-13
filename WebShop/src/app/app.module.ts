@@ -9,9 +9,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
 import { TrackOrderComponent } from './track-order/track-order.component';
+import { BannerComponent } from './banner/banner.component';
+import { HideByClassDirective } from './directives/hide-by-class.directive';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SignupComponent, TrackOrderComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    SignupComponent,
+    TrackOrderComponent,
+    BannerComponent,
+    HideByClassDirective,
+  ],
   schemas: [NO_ERRORS_SCHEMA],
   imports: [
     BrowserModule,
