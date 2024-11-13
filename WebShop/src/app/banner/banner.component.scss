@@ -133,8 +133,27 @@
   background-color: #eee;
 }
 
-form input {
-  padding: 10px;
-  width: 200px;
-  margin-right: 10px;
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+input {
+  width: 50%;
+  height: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 10%;
+}
+
+.error-snackbar {
+  background-color: #f44336 !important;
 }

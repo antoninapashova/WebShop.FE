@@ -105,9 +105,24 @@
 
 <section class="newsletter">
   <h2>Stay Updated</h2>
-  <p>Sign up for exclusive offers, latest trends, and more!</p>
-  <form>
-    <input type="email" placeholder="Enter your email" required />
-    <button mat-button type="submit" class="btn-primary">Subscribe</button>
+  <p>Sign up for exclusive offers, latest trends, promo codes and more!</p>
+  <form [formGroup]="emailForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email" required />
+      <mat-error *ngIf="emailForm.controls['email'].errors?.['required']"
+        >This input is required</mat-error
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="emailForm.invalid"
+      (click)="subscribe()"
+      class="subscribe-button"
+    >
+      Subscribe
+    </button>
   </form>
 </section>

@@ -76,6 +76,10 @@ export class CustomerService {
     });
   }
 
+  subscribe(email: string): Observable<any> {
+    return this.http.post(BASIC_URL + `subscribe/${email}`, {});
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',
