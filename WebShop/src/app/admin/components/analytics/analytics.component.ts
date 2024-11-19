@@ -14,7 +14,6 @@ export class AnalyticsComponent {
   ngOnInit() {
     this.adminService.getAnalytics().subscribe((res) => {
       this.data = res;
-      console.log(res);
     });
   }
 }
