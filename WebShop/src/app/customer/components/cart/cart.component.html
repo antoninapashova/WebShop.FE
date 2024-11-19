@@ -54,7 +54,7 @@
       Amount after discount: {{ amountAfterDiscount | currency }}
     </div>
     <div class="total-price" *ngIf="couponCode">
-      Applied coupon: {{ couponCode }}
+      Applied coupon: {{ couponCode }} for {{ discount }}% discount
     </div>
     <div>
       <button mat-raised-button color="primary" (click)="placeOrder()">
