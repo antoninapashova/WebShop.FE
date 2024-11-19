@@ -27,22 +27,21 @@ export class PostCategoryComponent {
 
   addCategory(): void {
     if (this.categoryForm.valid) {
-      this.adminService
-        .addCategory(this.categoryForm.value.name)
-        .subscribe((res) => {
-          if (res.id != null) {
-            this.snackBar.open('Categоry posted successfuly', 'Close', {
-              duration: 50000,
-            });
+      this.adminService.addCategory(this.categoryForm.value.name).subscribe({
+        next: (res) => {
+          this.snackBar.open(res.message, 'Close', {
+            duration: 50000,
+          });
 
-            this.router.navigateByUrl('/admin/dashboard');
-          } else {
-            this.snackBar.open(res.message, 'Close', {
-              duration: 50000,
-              panelClass: 'error-snackbar',
-            });
-          }
-        });
+          this.router.navigateByUrl('/admin/dashboard');
+        },
+        error: (err) => {
+          this.snackBar.open(err.message, 'Close', {
+            duration: 50000,
+            panelClass: 'error-snackbar',
+          });
+        },
+      });
     } else {
       this.categoryForm.markAllAsTouched();
     }

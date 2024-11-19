@@ -39,11 +39,11 @@ export class CartComponent {
       .getDiscount(this.couponForm.get(['code'])!.value)
       .subscribe({
         next: (res) => {
-          this.discount = res.data.discount;
+          this.discount = res.discount;
           const totalPrice = this.cart.totalPrice;
           this.amountAfterDiscount =
             totalPrice - (totalPrice * this.discount) / 100.0;
-          this.couponCode = res.data.code;
+          this.couponCode = res.code;
         },
         error: (err) => {
           this.snackBar.open(err.error.message, 'ERROR', {

@@ -49,8 +49,8 @@ export class OrderItemsComponent {
 
     this.adminService.getOrderItems(this.orderId).subscribe({
       next: (res) => {
-        this.dataSource.data = res.data;
-        this.orderItems = res.data;
+        this.dataSource.data = res;
+        this.orderItems = res;
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Close', {

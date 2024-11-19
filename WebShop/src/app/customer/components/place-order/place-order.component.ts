@@ -42,7 +42,7 @@ export class PlaceOrderComponent {
       next: (res) => {
         this.snackBar.open(res.message, 'Close', { duration: 5000 });
         this.router.navigateByUrl('/customer/dashboard');
-        this.trackingId = res.data;
+        this.trackingId = res.id;
       },
       error: (err) => {
         this.snackBar.open(err.error.message, 'ERROR', {

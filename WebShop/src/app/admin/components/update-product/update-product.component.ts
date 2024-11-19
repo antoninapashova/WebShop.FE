@@ -58,7 +58,7 @@ export class UpdateProductComponent {
 
   getAllCategories() {
     this.adminService.getAllCategories().subscribe({
-      next: (res) => (this.listOfCategories = res.data),
+      next: (res) => (this.listOfCategories = res),
       error: (err) => {
         this.snackBar.open(err.message, 'Error', {
           duration: 50000,

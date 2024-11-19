@@ -25,9 +25,9 @@ export class CouponsComponent {
   }
 
   getCoupons() {
-    this.adminService.getAllCoupons().subscribe((res) => {
-      this.dataSource = res.data;
-    });
+    this.adminService
+      .getAllCoupons()
+      .subscribe((res) => (this.dataSource = res));
   }
 
   clickEvent(index) {
