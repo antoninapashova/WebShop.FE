@@ -60,13 +60,13 @@ export class DashboardComponent {
     this.adminService.deleteProduct(productId).subscribe({
       next: (res) => {
         this.snackBar.open(res, 'Close', {
-          duration: 50000,
+          duration: 5000,
         });
         this.getAllPoducts();
       },
       error: (err) => {
         this.snackBar.open(err, 'Close', {
-          duration: 50000,
+          duration: 5000,
           panelClass: 'error-snackbar',
         });
       },

@@ -66,7 +66,8 @@ export class PostProductComponent {
       next: (res) => (this.listOfCategories = res),
       error: (err) => {
         this.snackBar.open(err.message, 'Error', {
-          duration: 50000,
+          duration: 5000,
+          panelClass: 'error-snackbar',
         });
       },
     });
@@ -86,13 +87,14 @@ export class PostProductComponent {
       this.adminService.addProduct(formData).subscribe({
         next: (res) => {
           this.snackBar.open(res.message, 'Close', {
-            duration: 50000,
+            duration: 5000,
           });
           this.router.navigateByUrl('/admin/dashboard');
         },
         error: (err) => {
           this.snackBar.open(err.error.message, 'Error', {
-            duration: 50000,
+            duration: 5000,
+            panelClass: 'error-snackbar',
           });
         },
       });

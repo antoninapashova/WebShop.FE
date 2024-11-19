@@ -47,7 +47,7 @@ export class CartComponent {
         },
         error: (err) => {
           this.snackBar.open(err.error.message, 'ERROR', {
-            duration: 50000,
+            duration: 5000,
             panelClass: 'error-snackbar',
           });
         },
@@ -69,14 +69,14 @@ export class CartComponent {
       .subscribe({
         next: (res) => {
           this.snackBar.open(res.message, 'Close', {
-            duration: 50000,
+            duration: 5000,
           });
 
           this.optimisticQuantityUpdate(itemId, isIncreaseChange);
         },
         error: (err) => {
           this.snackBar.open(err.error.message, 'ERROR', {
-            duration: 50000,
+            duration: 5000,
             panelClass: 'error-snackbar',
           });
         },
@@ -87,14 +87,14 @@ export class CartComponent {
     this.customerService.deleteItem(id).subscribe({
       next: (res) => {
         this.snackBar.open(res.message, 'Close', {
-          duration: 50000,
+          duration: 5000,
         });
 
         this.optimisticItemsUpdate(id);
       },
       error: (err) => {
         this.snackBar.open(err.error.message, 'ERROR', {
-          duration: 50000,
+          duration: 5000,
           panelClass: 'error-snackbar',
         });
       },

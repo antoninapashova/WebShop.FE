@@ -70,7 +70,7 @@ export class OrdersComponent {
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Close', {
-          duration: 50000,
+          duration: 5000,
           panelClass: 'error-snackbar',
         });
       },
@@ -81,14 +81,14 @@ export class OrdersComponent {
     this.adminService.changeOrderStatus(orderId, status).subscribe({
       next: (res) => {
         this.snackBar.open(res.message, 'Close', {
-          duration: 50000,
+          duration: 5000,
         });
 
         this.optimisticStatusUpdate(orderId, status);
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Close', {
-          duration: 50000,
+          duration: 5000,
           panelClass: 'error-snackbar',
         });
       },
@@ -104,13 +104,13 @@ export class OrdersComponent {
     this.adminService.setApprovedStatus(orderId, isApproved).subscribe({
       next: (res) => {
         this.snackBar.open(res.message, 'Close', {
-          duration: 50000,
+          duration: 5000,
         });
         this.optimisticApprovementUpdate(orderId, res.message);
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Close', {
-          duration: 50000,
+          duration: 5000,
           panelClass: 'error-snackbar',
         });
       },

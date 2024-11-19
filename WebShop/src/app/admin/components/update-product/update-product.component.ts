@@ -61,7 +61,7 @@ export class UpdateProductComponent {
       next: (res) => (this.listOfCategories = res),
       error: (err) => {
         this.snackBar.open(err.message, 'Error', {
-          duration: 50000,
+          duration: 5000,
         });
       },
     });
@@ -81,7 +81,7 @@ export class UpdateProductComponent {
       },
       error: (err) => {
         this.snackBar.open(err.message, 'Error', {
-          duration: 50000,
+          duration: 5000,
         });
       },
     });
@@ -111,13 +111,13 @@ export class UpdateProductComponent {
       this.adminService.updateProductById(formData, this.productId).subscribe({
         next: (res) => {
           this.snackBar.open(res.message, 'Close', {
-            duration: 50000,
+            duration: 5000,
           });
           this.router.navigateByUrl('/admin/dashboard');
         },
         error: (err) => {
           this.snackBar.open(err, 'Error', {
-            duration: 50000,
+            duration: 5000,
           });
         },
       });

@@ -30,14 +30,14 @@ export class PostCategoryComponent {
       this.adminService.addCategory(this.categoryForm.value.name).subscribe({
         next: (res) => {
           this.snackBar.open(res.message, 'Close', {
-            duration: 50000,
+            duration: 5000,
           });
 
           this.router.navigateByUrl('/admin/dashboard');
         },
         error: (err) => {
           this.snackBar.open(err.message, 'Close', {
-            duration: 50000,
+            duration: 5000,
             panelClass: 'error-snackbar',
           });
         },

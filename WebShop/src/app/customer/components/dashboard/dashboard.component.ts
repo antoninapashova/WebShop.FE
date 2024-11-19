@@ -59,14 +59,14 @@ export class DashboardComponent {
     this.customerService.addToCart(id).subscribe({
       next: (res) => {
         this.snackBar.open(res.message, 'Close', {
-          duration: 50000,
+          duration: 5000,
         });
 
         this.getAllPoducts();
       },
       error: (err) => {
         this.snackBar.open(err.message, 'ERROR', {
-          duration: 50000,
+          duration: 5000,
           panelClass: 'error-snackbar',
         });
       },

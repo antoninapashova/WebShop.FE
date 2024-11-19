@@ -33,13 +33,13 @@ export class PostCouponComponent {
       this.adminService.addCoupon(this.couponForm.value).subscribe({
         next: (res) => {
           this.snackBar.open(res.message, 'Close', {
-            duration: 50000,
+            duration: 5000,
           });
           this.router.navigateByUrl('/admin/dashboard');
         },
         error: (err) => {
           this.snackBar.open(err.error.message, 'Error', {
-            duration: 50000,
+            duration: 5000,
           });
         },
       });

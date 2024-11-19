@@ -31,7 +31,7 @@ export class UserOrdersComponent {
       },
       error: (err) => {
         this.snackBar.open(err.error.message, 'ERROR', {
-          duration: 50000,
+          duration: 5000,
           panelClass: 'error-snackbar',
         });
       },

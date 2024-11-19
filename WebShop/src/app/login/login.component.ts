@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(`${role.toLowerCase()}/dashboard`);
         },
         error: () => {
-          this.snackBar.open('Bad credentials', 'ERROR', { duration: 50000 });
+          this.snackBar.open('Bad credentials', 'ERROR', { duration: 5000 });
         },
       });
     }
