@@ -16,6 +16,7 @@ import { PostCouponComponent } from './components/post-coupon/post-coupon.compon
 import { CouponsComponent } from './components/coupons/coupons.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { OrderByStatusComponent } from './components/order-by-status/order-by-status.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { OrderByStatusComponent } from './components/order-by-status/order-by-st
     CouponsComponent,
     AnalyticsComponent,
     OrderByStatusComponent,
+    CategoriesComponent,
   ],
   schemas: [NO_ERRORS_SCHEMA],
   imports: [

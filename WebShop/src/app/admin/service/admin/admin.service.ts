@@ -25,6 +25,12 @@ export class AdminService {
     });
   }
 
+  deleteCategory(categoryId: string): Observable<any> {
+    return this.http.delete(BASIC_URL + `delete-category/${categoryId}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   addProduct(productDto: any): Observable<any> {
     return this.http.post(BASIC_URL + 'add-product', productDto, {
       headers: this.createAuthorizationHeader(),

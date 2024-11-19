@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../service/admin/admin.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-category',
@@ -15,7 +14,6 @@ export class PostCategoryComponent {
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private router: Router,
     private adminService: AdminService
   ) {}
 
@@ -32,11 +30,10 @@ export class PostCategoryComponent {
           this.snackBar.open(res.message, 'Close', {
             duration: 5000,
           });
-
-          this.router.navigateByUrl('/admin/dashboard');
+          window.location.reload();
         },
         error: (err) => {
-          this.snackBar.open(err.message, 'Close', {
+          this.snackBar.open(err.message, 'ERROOR', {
             duration: 5000,
             panelClass: 'error-snackbar',
           });
