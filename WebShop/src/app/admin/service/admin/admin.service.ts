@@ -127,6 +127,13 @@ export class AdminService {
     });
   }
 
+  addPromotion(promotion: any): Observable<any> {
+    console.log(promotion);
+    return this.http.post(BASIC_URL + 'create-promotion', promotion, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',

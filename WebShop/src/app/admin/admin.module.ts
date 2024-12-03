@@ -17,6 +17,7 @@ import { CouponsComponent } from './components/coupons/coupons.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
 import { OrderByStatusComponent } from './components/order-by-status/order-by-status.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { PostPromotionComponent } from './components/post-promotion/post-promotion.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
     AnalyticsComponent,
     OrderByStatusComponent,
     CategoriesComponent,
+    PostPromotionComponent,
   ],
   schemas: [NO_ERRORS_SCHEMA],
   imports: [

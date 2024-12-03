@@ -9,6 +9,7 @@ import { UpdateProductComponent } from './components/update-product/update-produ
 import { PostCouponComponent } from './components/post-coupon/post-coupon.component';
 import { CouponsComponent } from './components/coupons/coupons.component';
 import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { PostPromotionComponent } from './components/post-promotion/post-promotion.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'post-coupon', component: PostCouponComponent },
   { path: 'coupons', component: CouponsComponent },
   { path: 'analytics', component: AnalyticsComponent },
+  { path: 'post-promotion', component: PostPromotionComponent },
 ];
 
 @NgModule({

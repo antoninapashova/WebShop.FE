@@ -1,0 +1,95 @@
+<div class="class1">
+  <div class="container">
+    <h2>Set timed promotions</h2>
+    <form [formGroup]="promotionForm" (ngSubmit)="createPromotion()">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Discount %</mat-label>
+        <input
+          formControlName="discount"
+          matInput
+          type="number"
+          placeholder="Discount"
+        />
+        <mat-error
+          *ngIf="promotionForm.controls['discount'].errors?.['required']"
+          >This input is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Select Products</mat-label>
+        <mat-select
+          [formControl]="selectedItemsControl"
+          formControlName="productId"
+          name="productId"
+          multiple
+        >
+          <mat-option
+            *ngFor="let product of listOfProducts"
+            [value]="product.id"
+            [selected]="isSelected(product)"
+            (click)="toggleSelection(product)"
+          >
+            {{ product.name }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="promotionForm.controls['productId'].errors?.['required']"
+          >This input is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="startDate" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error
+          *ngIf="promotionForm.controls['startDate'].errors?.['required']"
+          >This input is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="endDate" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker1"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+        <mat-error
+          *ngIf="promotionForm.controls['endDate'].errors?.['required']"
+          >This input is required</mat-error
+        >
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        Set promotion
+      </button>
+    </form>
+  </div>
+
+  <div class="product-list">
+    <mat-card class="product-card" *ngFor="let product of selectedProducts">
+      <div class="product-image" *ngFor="let image of product.images">
+        <img [src]="image.img" alt="product-image" />
+      </div>
+      <div class="product-details">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <mat-divider></mat-divider>
+        <div class="product-info">
+          <div class="info-row">
+            <span class="info-lable">Regular price:</span>
+            <span class="info-value">${{ product.price }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-lable">Price after discount:</span>
+            <span class="info-value">${{ product.priceAfterDiscount }}</span>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
