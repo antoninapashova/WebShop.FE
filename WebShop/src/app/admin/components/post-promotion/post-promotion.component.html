@@ -3,6 +3,13 @@
     <h2>Set timed promotions</h2>
     <form [formGroup]="promotionForm" (ngSubmit)="createPromotion()">
       <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Name" formControlName="name" />
+        <mat-error *ngIf="promotionForm.controls['name'].errors?.['required']"
+          >This input is required</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
         <mat-label>Discount %</mat-label>
         <input
           formControlName="discount"

@@ -30,6 +30,7 @@ export class PostPromotionComponent {
 
   ngOnInit(): void {
     this.promotionForm = this.formBuilder.group({
+      name: [null, [Validators.required]],
       productId: [null, [Validators.required]],
       discount: [null, [Validators.required]],
       startDate: [null, [Validators.required]],
@@ -69,6 +70,7 @@ export class PostPromotionComponent {
       formData.append('startDate', this.promotionForm.get('startDate').value);
       formData.append('endDate', this.promotionForm.get('endDate').value);
       formData.append('discount', this.promotionForm.get('discount').value);
+      formData.append('name', this.promotionForm.get('name').value);
 
       this.selectedProducts.forEach((e) =>
         formData.append('productsInPromotion', e.id)
