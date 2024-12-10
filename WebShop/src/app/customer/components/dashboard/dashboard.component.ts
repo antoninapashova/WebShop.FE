@@ -30,7 +30,7 @@ export class DashboardComponent {
     this.customerService.getAllProducts().subscribe((res) => {
       res.forEach((product) => {
         let mappedImages = product.images.map(
-          (i) => 'data:image/jpeg;base64,' + i.img
+          (i) => 'data:image/jpeg;base64,' + i
         );
 
         product.images = mappedImages;

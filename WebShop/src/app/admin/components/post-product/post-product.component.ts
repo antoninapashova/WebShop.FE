@@ -92,7 +92,7 @@ export class PostProductComponent {
           this.router.navigateByUrl('/admin/dashboard');
         },
         error: (err) => {
-          this.snackBar.open(err.error.message, 'Error', {
+          this.snackBar.open(err.message, 'Error', {
             duration: 5000,
             panelClass: 'error-snackbar',
           });

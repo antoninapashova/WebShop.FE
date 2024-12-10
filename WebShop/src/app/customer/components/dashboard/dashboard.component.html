@@ -25,7 +25,7 @@
     </div>
 
     <div class="product-details">
-      <h2 class="product-name">{{ product.name }}</h2>
+      <h2 class="product-name">{{ product.productName }}</h2>
       <p class="product-description">{{ product.description }}</p>
 
       <mat-divider></mat-divider>
@@ -33,11 +33,19 @@
         <div class="info-row">
           <span class="info-lable">Price:</span>
           <span class="info-value">${{ product.price }}</span>
+          <span *ngIf="product.isActive" class="promotion-price"
+            >${{ product.priceInPromotion }}</span
+          >
         </div>
         <div class="info-row">
           <span class="info-lable">Category:</span>
           <span class="info-value">{{ product.categoryName }}</span>
         </div>
+        <div *ngIf="product.isActive" class="badge">Promotion</div>
+      </div>
+      <div *ngIf="product.isActive">
+        <span>The discount is active to </span>
+        <span>{{ product.endDate }}</span>
       </div>
       <mat-divider></mat-divider>
       <div class="actions">
@@ -45,7 +53,7 @@
           mat-raised-button
           color="primary"
           class="update-button"
-          (click)="addToCart(product.id)"
+          (click)="addToCart(product.productId)"
         >
           Add to Cart
         </button>

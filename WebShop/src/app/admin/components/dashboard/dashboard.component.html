@@ -22,18 +22,26 @@
       <app-carousel [slides]="product.images"></app-carousel>
     </div>
     <div class="product-details">
-      <h2 class="product-name">{{ product.name }}</h2>
+      <h2 class="product-name">{{ product.productName }}</h2>
       <p class="product-description">{{ product.description }}</p>
       <mat-divider></mat-divider>
       <div class="product-info">
         <div class="info-row">
           <span class="info-lable">Price:</span>
           <span class="info-value">${{ product.price }}</span>
+          <span *ngIf="product.isActive" class="promotion-price"
+            >${{ product.priceInPromotion }}</span
+          >
         </div>
         <div class="info-row">
           <span class="info-lable">Category:</span>
           <span class="info-value">{{ product.categoryName }}</span>
         </div>
+        <div *ngIf="product.isActive" class="badge">Promotion</div>
+      </div>
+      <div *ngIf="product.isActive">
+        <span>The discount is active to </span>
+        <span>{{ product.endDate }}</span>
       </div>
       <mat-divider></mat-divider>
       <div class="actions">
@@ -41,7 +49,7 @@
           mat-raised-button
           color="primary"
           class="update-button"
-          [routerLink]="'/admin/faq/' + product.id"
+          [routerLink]="'/admin/faq/' + product.productId"
         >
           FAQ
         </button>
@@ -49,7 +57,7 @@
           mat-raised-button
           color="accent"
           class="update-button"
-          [routerLink]="'/admin/product/' + product.id"
+          [routerLink]="'/admin/product/' + product.productId"
         >
           Update
         </button>
@@ -57,7 +65,7 @@
           mat-raised-button
           color="warn"
           class="delete-button"
-          (click)="deleteProduct(product.id)"
+          (click)="deleteProduct(product.productId)"
         >
           Delete
         </button>
