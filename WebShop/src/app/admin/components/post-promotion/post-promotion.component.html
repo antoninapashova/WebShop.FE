@@ -81,7 +81,7 @@
   <div class="product-list">
     <mat-card class="product-card" *ngFor="let product of selectedProducts">
       <div class="product-image" *ngFor="let image of product.images">
-        <img [src]="image.img" alt="product-image" />
+        <img [src]="image" alt="product-image" />
       </div>
       <div class="product-details">
         <h2 class="product-name">{{ product.name }}</h2>

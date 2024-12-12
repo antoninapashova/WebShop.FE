@@ -5,5 +5,6 @@ export default interface Product {
   quantity: number;
   categoryName: string;
   description: string;
+  priceAfterDiscount: number;
   images: string[];
 }

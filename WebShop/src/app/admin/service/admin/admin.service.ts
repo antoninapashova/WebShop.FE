@@ -134,6 +134,12 @@ export class AdminService {
     });
   }
 
+  getAllNonPromotionalProducts(): Observable<any> {
+    return this.http.get(BASIC_URL + 'get-non-promotional-products', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',

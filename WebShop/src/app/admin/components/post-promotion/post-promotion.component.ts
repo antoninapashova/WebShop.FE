@@ -45,10 +45,11 @@ export class PostPromotionComponent {
     let discountValue = Number(this.promotionForm.get('discount').value);
 
     if (index === -1) {
-      item.images.forEach(
-        (element) => (element.img = 'data:image/jpeg;base64,' + element.img)
+      let productImages = item.images.map(
+        (element) => 'data:image/jpeg;base64,' + element.img
       );
 
+      item.images = productImages;
       item.priceAfterDiscount =
         discountValue !== null
           ? item.price - (item.price * discountValue) / 100
@@ -76,6 +77,8 @@ export class PostPromotionComponent {
         formData.append('productsInPromotion', e.id)
       );
 
+      formData.forEach((e) => console.log(e));
+
       this.adminService.addPromotion(formData).subscribe({
         next: (res) => {
           this.snackBar.open(res.message, 'Close', {
@@ -95,8 +98,9 @@ export class PostPromotionComponent {
   }
 
   getAllProducts() {
-    this.adminService
-      .getAllProducts()
-      .subscribe((res) => (this.listOfProducts = res));
+    this.adminService.getAllNonPromotionalProducts().subscribe((res) => {
+      console.log(res);
+      this.listOfProducts = res;
+    });
   }
 }
