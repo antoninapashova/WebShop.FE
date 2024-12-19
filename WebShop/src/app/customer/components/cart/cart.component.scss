@@ -147,6 +147,10 @@ form {
   padding: 20px;
 }
 
+.error-snackbar {
+  background-color: #f44336 !important;
+}
+
 @media (max-width: 600px) {
   .cart-container {
     max-width: 500px;
