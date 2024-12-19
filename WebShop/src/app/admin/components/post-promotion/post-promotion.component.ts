@@ -96,8 +96,8 @@ export class PostPromotionComponent {
   }
 
   getAllProducts() {
-    this.adminService.getAllNonPromotionalProducts().subscribe((res) => {
-      this.listOfProducts = res;
-    });
+    this.adminService
+      .getAllNonPromotionalProducts()
+      .subscribe((res) => (this.listOfProducts = res));
   }
 }
