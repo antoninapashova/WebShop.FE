@@ -77,8 +77,6 @@ export class PostPromotionComponent {
         formData.append('productsInPromotion', e.id)
       );
 
-      formData.forEach((e) => console.log(e));
-
       this.adminService.addPromotion(formData).subscribe({
         next: (res) => {
           this.snackBar.open(res.message, 'Close', {
@@ -99,7 +97,6 @@ export class PostPromotionComponent {
 
   getAllProducts() {
     this.adminService.getAllNonPromotionalProducts().subscribe((res) => {
-      console.log(res);
       this.listOfProducts = res;
     });
   }
