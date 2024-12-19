@@ -25,7 +25,7 @@ export class BannerComponent {
 
   subscribe() {
     this.customerService
-      .subscribe(this.emailForm.get('email').value)
+      .subscribeToNewsletter(this.emailForm.get('email').value)
       .subscribe({
         next: (res) => {
           this.snackBar.open(res.message, 'Close', { duration: 5000 });
