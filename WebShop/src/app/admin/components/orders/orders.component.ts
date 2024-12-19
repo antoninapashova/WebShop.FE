@@ -96,10 +96,7 @@ export class OrdersComponent {
   }
 
   setIsApproved(orderId: string, approved: string) {
-    let isApproved: boolean = false;
-    if (approved === 'Approved') {
-      isApproved = true;
-    }
+    const isApproved = approved === 'Approved';
 
     this.adminService.setApprovedStatus(orderId, isApproved).subscribe({
       next: (res) => {
@@ -118,20 +115,18 @@ export class OrdersComponent {
   }
 
   optimisticApprovementUpdate(orderId: string, approved: string) {
-    let items = this.orders.map((element) => {
-      return element.id === orderId
-        ? { ...element, isApproved: approved }
-        : element;
-    });
+    let items = this.orders.map((element) =>
+      element.id === orderId ? { ...element, isApproved: approved } : element
+    );
 
     this.dataSource.data = items;
     this.orders = items;
   }
 
   optimisticStatusUpdate(orderId: string, status: string) {
-    let items = this.orders.map((element) => {
-      return element.id === orderId ? { ...element, status: status } : element;
-    });
+    let items = this.orders.map((element) =>
+      element.id === orderId ? { ...element, status: status } : element
+    );
 
     this.dataSource.data = items;
     this.orders = items;
