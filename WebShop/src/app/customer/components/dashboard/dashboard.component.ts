@@ -11,6 +11,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class DashboardComponent {
   products: any[] = [];
   searchProductForm!: FormGroup;
+  rating: number = 0;
+  averageRating: number = 0;
 
   constructor(
     private customerService: CustomerService,
@@ -63,6 +65,23 @@ export class DashboardComponent {
         });
 
         this.getAllPoducts();
+      },
+      error: (err) => {
+        this.snackBar.open(err.message, 'ERROR', {
+          duration: 5000,
+          panelClass: 'error-snackbar',
+        });
+      },
+    });
+  }
+
+  addRating(productId: string, rate: number) {
+    this.customerService.addRating(productId, rate).subscribe({
+      next: (res) => {
+        this.rating = rate;
+        this.snackBar.open(res.message, 'Close', {
+          duration: 5000,
+        });
       },
       error: (err) => {
         this.snackBar.open(err.message, 'ERROR', {

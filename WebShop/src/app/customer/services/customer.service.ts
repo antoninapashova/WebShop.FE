@@ -80,6 +80,14 @@ export class CustomerService {
     return this.http.post(BASIC_URL + `subscribe/${email}`, {});
   }
 
+  addRating(productId: string, score: number): Observable<any> {
+    return this.http.post(
+      BASIC_URL + `add-rating`,
+      { productId, score },
+      { headers: this.createAuthorizationHeader() }
+    );
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',

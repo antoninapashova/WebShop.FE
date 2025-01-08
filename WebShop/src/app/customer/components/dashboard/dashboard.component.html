@@ -23,6 +23,21 @@
     <div class="product-image">
       <app-carousel [slides]="product.images"></app-carousel>
     </div>
+    <div class="rating-container">
+      <mat-icon
+        *ngFor="let star of [1, 2, 3, 4, 5]"
+        [ngClass]="{
+          filled: rating >= star || averageRating >= star,
+          selected: rating >= star
+        }"
+        (click)="addRating(product.productId, star)"
+      >
+        stars
+      </mat-icon>
+    </div>
+    <p class="average-rating">
+      Average Rating: {{ averageRating | number : "1.0-1" }} / 5
+    </p>
 
     <div class="product-details">
       <h2 class="product-name">{{ product.productName }}</h2>
