@@ -9,4 +9,5 @@ export default interface PromotionProduct {
   isActive: boolean;
   images: string[];
   endDate: string;
+  rating: number;
 }
