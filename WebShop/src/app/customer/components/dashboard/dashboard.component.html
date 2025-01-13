@@ -1,22 +1,45 @@
-<form
-  [formGroup]="searchProductForm"
-  class="search-form"
-  (submit)="submitForm()"
->
-  <mat-form-field appearance="outline" class="search-input">
-    <mat-label>Enter Keyword to search</mat-label>
-    <input matInput type="text" placeholder="Name" formControlName="title" />
-  </mat-form-field>
+<div class="search-bar">
+  <form class="category-form">
+    <mat-form-field class="search-input">
+      <mat-label>Categories</mat-label>
+      <input
+        type="text"
+        matInput
+        [formControl]="myControl"
+        [matAutocomplete]="auto"
+        (ngModelChange)="onCategorySelect(myControl.value)"
+      />
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option
+          *ngFor="let option of filteredOptions | async"
+          [value]="option"
+        >
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
 
-  <button
-    mat-raised-button
-    color="primary"
-    type="submit"
-    [disabled]="searchProductForm.invalid"
+  <form
+    [formGroup]="searchProductForm"
+    class="search-form"
+    (submit)="submitForm()"
   >
-    <mat-icon>search</mat-icon>
-  </button>
-</form>
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Enter Keyword to search</mat-label>
+      <input matInput type="text" placeholder="Name" formControlName="title" />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="searchProductForm.invalid"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+  </form>
+</div>
 
 <div class="product-list">
   <mat-card class="product-card" *ngFor="let product of products">

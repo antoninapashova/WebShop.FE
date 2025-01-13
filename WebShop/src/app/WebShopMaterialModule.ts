@@ -18,6 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   imports: [
@@ -41,6 +42,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTableModule,
     MatPaginatorModule,
     MatSidenavModule,
+    MatAutocompleteModule,
   ],
   exports: [
     MatButtonModule,
@@ -63,6 +65,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTableModule,
     MatPaginatorModule,
     MatSidenavModule,
+    MatAutocompleteModule,
   ],
 })
 export class WebShopMaterialModule {}

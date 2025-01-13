@@ -88,6 +88,12 @@ export class CustomerService {
     );
   }
 
+  getAllCategories(): Observable<any> {
+    return this.http.get(BASIC_URL + 'all-categories', {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().append(
       'Authorization',
